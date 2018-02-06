@@ -30,5 +30,8 @@ angular.module("balance").factory("UserFactory", (FBCreds, $q) => {
             });
         });
     };
+    authObj.getCurrentUser = () => {
+        return currentUser;
+    };
     return authObj;
 });

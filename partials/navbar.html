@@ -1,4 +1,9 @@
 <nav class="navbar" ng-controller="NavCtrl">
     <h1>Welcome to Balance: Your Self-Improvement Productivity App</h1>
+    <ul>
+        <li class="nav-items" ng-repeat="item in navItems"> 
 
+            <a ng-show="{{item.bang}}isLoggedIn" ng-click="navigate(item.url)">{{item.name}}</a>
+        </li>
+    </ul>
 </nav>

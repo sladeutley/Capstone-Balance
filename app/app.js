@@ -32,7 +32,7 @@ angular.module("balance", ["ngRoute"])
   .run(FBCreds => {
     let creds = FBCreds;
     let authConfig = {
-        apiKey: creds.key,
+        apiKey: creds.apiKey,
         authDomain: creds.authDomain
     };
     firebase.initializeApp(authConfig);

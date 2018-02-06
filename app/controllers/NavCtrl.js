@@ -19,7 +19,8 @@ angular
     $scope.navItems = [
       {
         name: "login",
-        url: "#!/login"
+        url: "#!/login",
+        bang: "!"
       },
       {
         name: "logout",
