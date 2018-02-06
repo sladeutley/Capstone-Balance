@@ -28,15 +28,15 @@ angular
       }
     ];
 
-    firebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        $scope.$apply(($scope.isLoggedIn = true));
-      } else {
-        $scope.isLoggedIn = false;
-        $scope.$apply(); //to update scope
-        $window.location.href = "#!/login";
-      }
-    });
+    // firebase.auth().onAuthStateChanged(function(user) {
+    //   if (user) {
+    //     $scope.$apply(($scope.isLoggedIn = true));
+    //   } else {
+    //     $scope.isLoggedIn = false;
+    //     $scope.$apply(); //to update scope
+    //     $window.location.href = "#!/login";
+    //   }
+    // });
 
     $scope.navigate = navUrl => {
       console.log("navUrl", navUrl);
