@@ -13,12 +13,12 @@ let isAuthorized = (UserFactory) =>
       }
     });
   });
-  
+
 angular.module("balance", ["ngRoute"])
   .constant("FBUrl", "https://balance-a7ec9.firebaseio.com/")
   .config($routeProvider => {
     $routeProvider
-      .when('/register', {
+      .when('/login', {
         templateUrl: "partials/user.html",
         controller: "UserCtrl"
       })
