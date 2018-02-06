@@ -14,7 +14,7 @@ let isAuthorized = (UserFactory) =>
     });
   });
 
-angular.module("balance", ["ngRoute"])
+angular.module("balance", ["ngRoute", 'chart.js'])
   .constant("FBUrl", "https://balance-a7ec9.firebaseio.com/")
   .config($routeProvider => {
     $routeProvider
