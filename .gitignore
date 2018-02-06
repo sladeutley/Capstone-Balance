@@ -1,0 +1,5 @@
+dist/project.js
+node_modules
+css/
+.sass-cache
+values
