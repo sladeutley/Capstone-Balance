@@ -5,11 +5,11 @@ angular
   .controller("NavCtrl", function(
     $scope,
     $location,
-    $rooteScope,
+    $rootScope,
     $window,
     $route,
-    UserFactory,
-    UserGoalFactory
+    UserFactory
+    // UserGoalFactory
   ) {
     //DON't NEED THIS UNLESS DOING SEARCH FUNCTION
     // $scope.isUserActive = function(viewLocation) {
