@@ -20,7 +20,7 @@ angular.module("balance", ["ngRoute"])
     $routeProvider
       .when('/login', {
         templateUrl: "partials/user.html",
-        controller: "UserCtrl"
+        controller: "UserLoginCtrl"
       })
       .when('/:id', {
         templateUrl: "partials/users-page.html",
