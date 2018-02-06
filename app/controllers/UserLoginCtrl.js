@@ -7,11 +7,12 @@ angular
       UserFactory.createUser($scope.account)
         .then(user => {
           console.log("newUser: ", user);
-          $scope.log();
+          $scope.login();
         })
         .catch(function({ code, message }) {
           //??what is this doing?
           console.log("wrong info", code, message);
+          $window.alert("This user already exists. Please use a different email.");
         });
     };
 
