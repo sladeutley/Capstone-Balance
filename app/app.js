@@ -1,5 +1,19 @@
 'use strict';
 
+let isAuthorized = (UserFactory) =>
+  new Promise((resolve, reject) => {
+    UserFactory.isRegisted().then(userBoolean => {
+      console.log("Who is this user : ", userBoolean);
+      if (userBoolean) {
+        console.log("User is registered");
+        resolve();
+      } else {
+        console.log("User needs to register!");
+        reject();
+      }
+    });
+  });
+  
 angular.module("balance", ["ngRoute"])
   .constant("FBUrl", "https://balance-a7ec9.firebaseio.com/")
   .config($routeProvider => {
@@ -11,7 +25,7 @@ angular.module("balance", ["ngRoute"])
       .when('/:id', {
         templateUrl: "partials/users-page.html",
         controller: "UserPageCtrl",
-        resolve: {isAuth}
+        resolve: {isAuthorized}
       })
       .otherwise('/');
   })
