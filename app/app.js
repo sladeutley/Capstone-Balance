@@ -4,11 +4,16 @@ angular.module("balance", ["ngRoute"])
   .constant("FBUrl", "https://balance-a7ec9.firebaseio.com/")
   .config($routeProvider => {
     $routeProvider
-      .when('/login', {
+      .when('/register', {
         templateUrl: "partials/user.html",
         controller: "UserCtrl"
       })
-      .otherwise('/login');
+      .when('/:id', {
+        templateUrl: "partials/users-page.html",
+        controller: "UserPageCtrl",
+        resolve: {isAuth}
+      })
+      .otherwise('/');
   })
   .run(FBCreds => {
     let creds = FBCreds;
