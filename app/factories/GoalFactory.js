@@ -44,10 +44,10 @@ angular.module("balance").factory("GoalFactory", (FBUrl, $http, $q, $routeParams
     });
   }
 
-  function updataGoal(goal, goalId) {
+  function updateGoal(goal, goalId) {
     return $q((resolve, reject) => {
       $http
-        .put(`${FBUrl}/goals/${goalId}.json`, JSON.stringify(goal))
+        .patch(`${FBUrl}/goals/${goalId}.json`, JSON.stringify(goal))
         .then(data => {
           resolve(data);
         })
@@ -56,5 +56,5 @@ angular.module("balance").factory("GoalFactory", (FBUrl, $http, $q, $routeParams
         });
     });
   }
-  return { addNewGoal, getUserGoals, deleteGoal, updataGoal };
+  return { addNewGoal, getUserGoals, deleteGoal, updateGoal };
 });

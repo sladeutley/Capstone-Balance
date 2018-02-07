@@ -41,5 +41,31 @@ angular.module("balance").factory("CategoryFactory", (FBUrl, $http, $q) => {
     });
   }
 
-  return { getCategory, addCategory };
+  function deleteCategory(categoryId) {
+    return $q((resolve, reject) => {
+      $http
+        .delete(`${FBUrl}/categories/${categoryId}.json`)
+        .then(data => {
+          resolve(data);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  }
+
+  function updateCategory(category, categoryId) {
+    return $q((resolve, reject) => {
+      $http
+        .put(`${FBUrl}/goals/${categoryId}.json`, JSON.stringify(category))
+        .then(data => {
+          resolve(data);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  }
+
+  return { getCategory, addCategory, deleteCategory, updateCategory };
 });
