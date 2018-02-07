@@ -13,30 +13,18 @@ angular
     $scope.labels = [];
     $scope.data = [];
 
-    CategoryFactory.getCategories()
-        .then(categoriesData => {
-            if (categoriesData.length > 0) {
-                console.log('categoriesData',categoriesData);
-                categoriesData.forEach(category => {
-                    console.log(category.name);
-                    $scope.labels.push(category.name);
-                    $scope.data.push(category.importance);
-                });
-                console.log($scope.labels);
-            } else {
-                $scope.message = "Add some categories!";
-            }
+    CategoryFactory.getCategories().then(categoriesData => {
+      if (categoriesData.length > 0) {
+        categoriesData.forEach(category => {
+          $scope.labels.push(category.name);
+          $scope.data.push(category.importance);
         });
+      } else {
+        $scope.message = "Add some categories!";
+      }
+    });
 
-    //GET GOALS
-    //DONT HAVE ANY GOALS YET
-
-    $scope.goalItems = {
-      name: "",
-      description: "",
-      accomplished: false
-      //NEED AN NG-OPTION FOR DROPDOWN ON IMPORTANCE
-    };
+    //adding goals
 
     $scope.addGoal = () => {
       console.log("a new goal was added", $scope.goalItems);
@@ -49,9 +37,17 @@ angular
       });
     };
 
-    //CANT GET GOALS TO SHOW UP
-    let user = UserFactory.getCurrentUser();
-    GoalFactory.getUserGoals(user)
+    //getting goals
+
+    $scope.goalItems = {
+        name: "",
+        description: "",
+        accomplished: false,
+        categoryId: "",
+        //NEED AN NG-OPTION FOR DROPDOWN ON IMPORTANCE
+      };
+
+    GoalFactory.getUserGoals()
       .then(goalsData => {
         if (goalsData.length > 0) {
           $scope.goals = goalsData;

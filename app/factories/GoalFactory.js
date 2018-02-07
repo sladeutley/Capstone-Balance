@@ -34,6 +34,7 @@ angular.module("balance").factory("GoalFactory", (FBUrl, $http, $q, $routeParams
   // }
 
   function getUserGoals() {
+    console.log("goal factory", firebase.auth().currentUser.uid);
     return $q((resolve, reject) => {
       $http
         .get(

@@ -58,7 +58,6 @@ angular
     };
 
     $scope.logout = () =>{
-      console.log("user", UserFactory.getCurrentUser());
       UserFactory.logoutUser();
     };
   });

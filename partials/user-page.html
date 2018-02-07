@@ -19,7 +19,9 @@
     </div>
     <button ng-click="addGoal()">Add Goal!</button>
 </div> 
-
+<br>
+<h3>GOALS!</h3>
 <div ng-repeat="goal in goals">
-
+    {{goal.name}}:
+    {{goal.description}}
 </div>
