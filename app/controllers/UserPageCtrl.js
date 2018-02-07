@@ -10,14 +10,23 @@ angular
     UserFactory
   ) {
     //GET CATEGORIES
-    $scope.labels = [
-      "Download Sales",
-      "In-Store Sales",
-      "Mail-Order Sales",
-      "Tele Sales",
-      "Corporate Sales"
-    ];
-    $scope.data = [300, 500, 100, 40, 120];
+    $scope.labels = [];
+    $scope.data = [];
+
+    CategoryFactory.getCategories()
+        .then(categoriesData => {
+            if (categoriesData.length > 0) {
+                console.log('categoriesData',categoriesData);
+                categoriesData.forEach(category => {
+                    console.log(category.name);
+                    $scope.labels.push(category.name);
+                    $scope.data.push(category.importance);
+                });
+                console.log($scope.labels);
+            } else {
+                $scope.message = "Add some categories!";
+            }
+        });
 
     //GET GOALS
     //DONT HAVE ANY GOALS YET
@@ -40,6 +49,7 @@ angular
       });
     };
 
+    //CANT GET GOALS TO SHOW UP
     let user = UserFactory.getCurrentUser();
     GoalFactory.getUserGoals(user)
       .then(goalsData => {

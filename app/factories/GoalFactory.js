@@ -17,17 +17,39 @@ angular.module("balance").factory("GoalFactory", (FBUrl, $http, $q, $routeParams
 
 
   //I wanna be able to get these by userId
-  function getUserGoals(userId) {
+  // function getUserGoals(userId) {
+  //   return $q((resolve, reject) => {
+  //     $http
+  //       .get(
+  //         `${FBUrl}/goals.json?orderBy="uid"&equalTo="${userId}"`
+  //       )
+  //       .then(({ data }) => {
+  //         let goalArr = Object.keys(data).map(goalKey => {
+  //           data[goalKey].id = goalKey;
+  //           return data[goalKey];
+  //         });
+  //         resolve(goalArr);
+  //       });
+  //   });
+  // }
+
+  function getUserGoals() {
     return $q((resolve, reject) => {
       $http
         .get(
-          `${FBUrl}/goals.json?orderBy="uid"&equalTo="${userId}"`
+          `${FBUrl}/goals.json?orderBy="uid"&equalTo="${
+            firebase.auth().currentUser.uid
+          }"`
         )
         .then(({ data }) => {
+          console.log("goals", data);
           let goalArr = Object.keys(data).map(goalKey => {
+            console.log("goalKey", goalKey);
             data[goalKey].id = goalKey;
+            //I'd LIKE TO REVIEW THIS OBJECT.KEYS - i get what its doing, just not how its working
             return data[goalKey];
           });
+          console.log("goalArr", goalArr);
           resolve(goalArr);
         });
     });

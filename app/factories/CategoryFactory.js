@@ -3,7 +3,7 @@
 angular.module("balance").factory("CategoryFactory", (FBUrl, $http, $q) => {
   
   //DON't KNOW IF I NEED AN OBJECT.KEYS, MAYBE JUST NEED THAT FOR GOALS, AND TO PASS USER ID INTO GET CATEGORIES
-    function getCategory() {
+    function getCategories() {
     return $q((resolve, reject) => {
       $http
         .get(
@@ -66,5 +66,5 @@ angular.module("balance").factory("CategoryFactory", (FBUrl, $http, $q) => {
     });
   }
 
-  return { getCategory, addCategory, deleteCategory, updateCategory };
+  return { getCategories, addCategory, deleteCategory, updateCategory };
 });

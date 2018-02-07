@@ -1,4 +1,5 @@
-<h1>hello</h1>
+
+<h3>{{message}}</h3>
 
 <canvas id="polar-area" class="chart chart-polar-area"
   chart-data="data" chart-labels="labels" chart-options="options">
@@ -17,8 +18,7 @@
         <input type="text" placeholder="goal description" ng-model="goalItems.description" ng-value="item.description">
     </div>
     <button ng-click="addGoal()">Add Goal!</button>
-</div>
-<h3>{{message}}</h3> 
+</div> 
 
 <div ng-repeat="goal in goals">
 
