@@ -30,7 +30,6 @@ angular.module("balance").factory("CategoryFactory", (FBUrl, $http, $q) => {
       $http
         .post(`${FBUrl}/categories.json`, JSON.stringify(category))
         .then(data => {
-          console.log("New Category Added", { data }.name);
           console.log("New Category Added", data.data.name);
           resolve(data.data);
         })

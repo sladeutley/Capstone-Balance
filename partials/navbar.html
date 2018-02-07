@@ -3,8 +3,11 @@
     <ul>
         <li class="nav-items" ng-repeat="item in navItems"> 
             <!-- PUT BELOW EVENTUALLY: ng-show="{{item.bang}}isLoggedIn" -->
-            <a  ng-click="navigate(item.url)">{{item.name}}</a>
+            <a  ng-href="{{item.url}}">{{item.name}}</a>
             <!-- EXAMPLE OF COMMENTING CODE - ng-click is activating navigate function in NavCtrl.js -->
+        </li>
+        <li>
+            <button ng-click="logout()">logout</button>
         </li>
     </ul>
 </nav>

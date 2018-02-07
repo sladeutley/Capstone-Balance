@@ -15,11 +15,11 @@ angular.module("balance").factory("GoalFactory", (FBUrl, $http, $q, $routeParams
     });
   }
 
-  function getUserGoals() {
+  function getUserGoals(userId) {
     return $q((resolve, reject) => {
       $http
         .get(
-          `${FBUrl}/goals.json?orderBy="CategoryId"&equalTo="${$routeParams.id}"`
+          `${FBUrl}/goals.json?orderBy="CategoryId"&equalTo="${userId}"`
         )
         .then(({ data }) => {
           let goalArr = Object.keys(data).map(goalKey => {

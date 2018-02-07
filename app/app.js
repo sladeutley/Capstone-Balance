@@ -4,7 +4,7 @@
 // actually, it is working when not commented out, but somethings weird about it
 let isAuthorized = (UserFactory) =>
   new Promise((resolve, reject) => {
-    UserFactory.isRegisted().then(userBoolean => {
+    UserFactory.isRegistered().then(userBoolean => {
       console.log("Who is this user : ", userBoolean);
       if (userBoolean) {
         console.log("User is registered");
@@ -27,16 +27,16 @@ angular.module("balance", ["ngRoute", 'chart.js'])
       .when('/user-page', {
         templateUrl: "partials/user-page.html",
         controller: "UserPageCtrl",
-        // resolve: {isAuthorized}
+        resolve: {isAuthorized}
       })
       .when('/categories/new', {
         templateUrl: "partials/category-new.html",
         controller: "CategoryNewCtrl",
-        // resolve: {isAuthorized}        
+        resolve: {isAuthorized}        
       })
 
       // .otherwise('/new-user'); WANT it to go the page that explains the site and says "get started here" or "register"
-      .otherwise('/');
+      .otherwise('/login');
   })
   .run(FBCreds => {
     let creds = FBCreds;

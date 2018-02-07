@@ -24,10 +24,6 @@ angular
         bang: "!"
       },
       {
-        name: "logout",
-        url: "#!/logout",
-      },
-      {
         name: "user page",
         url: "#!/user-page",
       },
@@ -43,7 +39,8 @@ angular
 
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
-        $scope.$apply(($scope.isLoggedIn = true));
+        $scope.isLoggedIn = true;
+        $scope.$apply();
       } else {
         $scope.isLoggedIn = false;
         $scope.$apply(); //to update scope
@@ -58,5 +55,9 @@ angular
       } else {
         $window.location.href = navUrl;
       }
+    };
+
+    $scope.logout = () =>{
+      UserFactory.logoutUser();
     };
   });
