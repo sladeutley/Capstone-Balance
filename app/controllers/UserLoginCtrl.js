@@ -21,7 +21,7 @@ angular
         .then(user => {
           console.log("the user is: ", user);
           // $window.location.href = "#/:id"; NEED IT TO GO TO USERS PAGE EVENTUALLY
-          $window.location.href = "#/user-page";
+          $window.location.href = "#!/user-page";
         })
         .catch(err => {
           console.log("err");

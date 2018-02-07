@@ -1,7 +1,9 @@
 "use strict";
 
 angular.module("balance").factory("CategoryFactory", (FBUrl, $http, $q) => {
-  function getCategory() {
+  
+  //DON't KNOW IF I NEED AN OBJECT.KEYS, MAYBE JUST NEED THAT FOR GOALS, AND TO PASS USER ID INTO GET CATEGORIES
+    function getCategory() {
     return $q((resolve, reject) => {
       $http
         .get(
