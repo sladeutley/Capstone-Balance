@@ -1,11 +1,25 @@
 <h1>hello</h1>
 
-<canvas ng-repeat="label in data" id="polar-area" class="chart chart-polar-area"
+<canvas id="polar-area" class="chart chart-polar-area"
   chart-data="data" chart-labels="labels" chart-options="options">
   {{labels}}
 </canvas> 
 
-<!-- <canvas ng-repeat="item in chartItems" id="polar-area" class="chart chart-polar-area"
-  chart-data="data" chart-labels="labels" chart-options="options">
-  {{item.labels}}
-</canvas>  -->
+<div>
+    <h1>Add Goal</h1>
+    <h3>{{name}}</h3>
+    <div>
+        <label>Goal Name</label>
+        <input type="text" placeholder='goal name' ng-model="goalItems.name" ng-value="item.name">
+    </div>
+    <div>
+        <label>Description</label>
+        <input type="text" placeholder="goal description" ng-model="goalItems.description" ng-value="item.description">
+    </div>
+    <button ng-click="addGoal()">Add Goal!</button>
+</div>
+<h3>{{message}}</h3> 
+
+<div ng-repeat="goal in goals">
+
+</div>

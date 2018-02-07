@@ -15,11 +15,13 @@ angular.module("balance").factory("GoalFactory", (FBUrl, $http, $q, $routeParams
     });
   }
 
+
+  //I wanna be able to get these by userId
   function getUserGoals(userId) {
     return $q((resolve, reject) => {
       $http
         .get(
-          `${FBUrl}/goals.json?orderBy="CategoryId"&equalTo="${userId}"`
+          `${FBUrl}/goals.json?orderBy="uid"&equalTo="${userId}"`
         )
         .then(({ data }) => {
           let goalArr = Object.keys(data).map(goalKey => {
