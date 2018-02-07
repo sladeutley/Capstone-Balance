@@ -1,0 +1,13 @@
+<div>
+    <h1>Add Category</h1>
+    <h3>{{name}}</h3>
+    <div>
+        <label>Category Title</label>
+        <input type="text" placeholder='for example, "fitness, social-life, work, etc.""' ng-model="categoryItem.name" ng-value="item.name">
+    </div>
+    <div>
+        <label>Category Importance</label>
+        <input type="text" placeholder="type a number from 1 to 10" ng-model="categoryItem.importance" ng-value="item.importance">
+    </div>
+    <button ng-click="saveCategory()">Add Category!</button>
+</div>

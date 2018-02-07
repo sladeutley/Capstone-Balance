@@ -1,7 +1,11 @@
 <h1>hello</h1>
 
-{{message}}
-
-<canvas id="polar-area" class="chart chart-polar-area"
+<canvas ng-repeat="label in data" id="polar-area" class="chart chart-polar-area"
   chart-data="data" chart-labels="labels" chart-options="options">
+  {{labels}}
 </canvas> 
+
+<!-- <canvas ng-repeat="item in chartItems" id="polar-area" class="chart chart-polar-area"
+  chart-data="data" chart-labels="labels" chart-options="options">
+  {{item.labels}}
+</canvas>  -->
