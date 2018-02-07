@@ -26,7 +26,7 @@ angular.module("balance").factory("CategoryFactory", (FBUrl, $http, $q) => {
   function addCategory(category) {
     return $q((resolve, reject) => {
       $http
-        .post(`${FBUrl}/items.json`, JSON.stringify(category))
+        .post(`${FBUrl}/categories.json`, JSON.stringify(category))
         .then(data => {
           console.log("New Category Added", { data }.name);
           console.log("New Category Added", data.data.name);

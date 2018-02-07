@@ -20,7 +20,8 @@ angular
       UserFactory.loginUser($scope.account)
         .then(user => {
           console.log("the user is: ", user);
-          $window.location.href = "#/:id";
+          // $window.location.href = "#/:id"; NEED IT TO GO TO USERS PAGE EVENTUALLY
+          $window.location.href = "#/user-page";
         })
         .catch(err => {
           console.log("err");

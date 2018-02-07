@@ -1,5 +1,7 @@
 'use strict';
 
+// I DONT THINK THIS IS WORKING. I DONT SEE ANY OF THE CONSOLE LOgS
+// actually, it is working when not commented out, but somethings weird about it
 let isAuthorized = (UserFactory) =>
   new Promise((resolve, reject) => {
     UserFactory.isRegisted().then(userBoolean => {
@@ -27,7 +29,7 @@ angular.module("balance", ["ngRoute", 'chart.js'])
         controller: "UserPageCtrl",
         // resolve: {isAuthorized}
       })
-      .when('categories/new', {
+      .when('/categories/new', {
         templateUrl: "partials/category-new.html",
         controller: "CategoryNewCtrl",
         // resolve: {isAuthorized}        
