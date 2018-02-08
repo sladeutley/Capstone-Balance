@@ -34,6 +34,9 @@ angular
       }
     });
 
+    //delete category function
+    //WHEN DELETE BOARD, DOES IT DELETE GOALS TOO IN THE FIREBASE?????
+
     $scope.goToCategoryPage = (categoryId) => {
         $location.url(`/categories/${categoryId}`);
     };

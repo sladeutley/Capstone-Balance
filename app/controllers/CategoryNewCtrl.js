@@ -2,7 +2,7 @@
 
 angular
   .module("balance")
-  .controller("CategoryNewCtrl", function($scope, CategoryFactory, $location, $window) {
+  .controller("CategoryNewCtrl", function($scope, CategoryFactory, $location, $window, $route) {
     $scope.categoryItems = {
       name: "",
       importance: ""
@@ -13,6 +13,7 @@ angular
       $scope.categoryItems.uid = firebase.auth().currentUser.uid;
       CategoryFactory.addCategory($scope.categoryItems).then(data => {
         // $location.location.href = "#!/user-page";
+        // $route.reload();
         $window.location.href = "#!/user-page";
         //WHY $WINDOW?????
       });

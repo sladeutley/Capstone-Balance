@@ -1,6 +1,7 @@
 "use strict";
 
 angular.module("balance").factory("GoalFactory", (FBUrl, $http, $q, $routeParams) => {
+  
   function addNewGoal(goal) {
     return $q((resolve, reject) => {
       $http
@@ -16,31 +17,11 @@ angular.module("balance").factory("GoalFactory", (FBUrl, $http, $q, $routeParams
   }
 
 
-  //I wanna be able to get these by userId
-  // function getUserGoals(userId) {
-  //   return $q((resolve, reject) => {
-  //     $http
-  //       .get(
-  //         `${FBUrl}/goals.json?orderBy="uid"&equalTo="${userId}"`
-  //       )
-  //       .then(({ data }) => {
-  //         let goalArr = Object.keys(data).map(goalKey => {
-  //           data[goalKey].id = goalKey;
-  //           return data[goalKey];
-  //         });
-  //         resolve(goalArr);
-  //       });
-  //   });
-  // }
-
   function getUserGoals() {
     console.log("goal factory", firebase.auth().currentUser.uid);
     return $q((resolve, reject) => {
       $http
         .get(
-          // `${FBUrl}/goals.json?orderBy="uid"&equalTo="${
-          //   firebase.auth().currentUser.uid
-          // }"`
           `${FBUrl}/goals.json?orderBy="categoryId"&equalTo="${$routeParams.id}"`
         )
         .then(({ data }) => {

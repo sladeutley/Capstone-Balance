@@ -1,7 +1,11 @@
 <h3>GOALS!</h3>
-<div ng-repeat="goal in goals">
-    {{goal.name}}:
-    {{goal.description}}
+
+<div class="allGoals">
+    <div ng-repeat="goal in goals">
+        {{goal.name}}:
+        {{goal.description}}
+        <button class="delete-btn" ng-click="deleteUserGoal(goal.id)">delete goal</button>
+    </div>
 </div>
 
 <div>
