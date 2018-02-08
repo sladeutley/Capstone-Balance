@@ -34,6 +34,11 @@ angular.module("balance", ["ngRoute", 'chart.js'])
         controller: "CategoryNewCtrl",
         resolve: {isAuthorized}        
       })
+      .when('/categories/:id', {
+        templateUrl: 'partials/category.html',
+        controller: 'CategoryCtrl',
+        resolve: { isAuthorized }
+      })
 
       // .otherwise('/new-user'); WANT it to go the page that explains the site and says "get started here" or "register"
       .otherwise('/login');

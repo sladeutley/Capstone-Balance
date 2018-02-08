@@ -14,7 +14,7 @@ angular.module("balance").factory("CategoryFactory", (FBUrl, $http, $q) => {
         .then(({ data }) => {
           console.log("categories", data);
           let categoryArr = Object.keys(data).map(categoryKey => {
-            console.log("categoryKey", categoryKey);
+            // console.log("categoryKey", categoryKey);
             data[categoryKey].id = categoryKey;
             //I'd LIKE TO REVIEW THIS OBJECT.KEYS - i get what its doing, just not how its working
             return data[categoryKey];

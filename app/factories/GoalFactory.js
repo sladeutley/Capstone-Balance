@@ -38,9 +38,10 @@ angular.module("balance").factory("GoalFactory", (FBUrl, $http, $q, $routeParams
     return $q((resolve, reject) => {
       $http
         .get(
-          `${FBUrl}/goals.json?orderBy="uid"&equalTo="${
-            firebase.auth().currentUser.uid
-          }"`
+          // `${FBUrl}/goals.json?orderBy="uid"&equalTo="${
+          //   firebase.auth().currentUser.uid
+          // }"`
+          `${FBUrl}/goals.json?orderBy="categoryId"&equalTo="${$routeParams.id}"`
         )
         .then(({ data }) => {
           console.log("goals", data);

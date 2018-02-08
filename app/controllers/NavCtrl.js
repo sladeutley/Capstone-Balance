@@ -30,11 +30,7 @@ angular
       {
         name: "new category",
         url: "#!/categories/new",
-      },
-      {
-        name: "new goal",
-        url: "#!/goal/new",
-      },
+      }
     ];
 
     firebase.auth().onAuthStateChanged(function(user) {

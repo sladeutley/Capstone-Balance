@@ -5,6 +5,7 @@ angular
   .controller("UserPageCtrl", function(
     $scope,
     $window,
+    $location,
     CategoryFactory,
     GoalFactory,
     UserFactory
@@ -13,49 +14,28 @@ angular
     $scope.labels = [];
     $scope.data = [];
 
+    $scope.categoryIds = [];
+
     CategoryFactory.getCategories().then(categoriesData => {
       if (categoriesData.length > 0) {
+        //doing this bc not able to click on category on pie chart yet
+        $scope.categories = categoriesData;
+        //
         categoriesData.forEach(category => {
+          //TRYING TO GIVE EACH CATEGORY AN ID SO WHEN YOU CLICK ON IT, IT ONLY GIVES YOU THAT CATEGORY'S GOALS
+          $scope.categoryIds.push(category.id);
+          //
           $scope.labels.push(category.name);
           $scope.data.push(category.importance);
         });
+        console.log("$scope.categoryIds", $scope.categoryIds);
       } else {
         $scope.message = "Add some categories!";
       }
     });
 
-    //adding goals
-
-    $scope.addGoal = () => {
-      console.log("a new goal was added", $scope.goalItems);
-      $scope.goalItems.uid = firebase.auth().currentUser.uid;
-      //COULD I USE A "firebase.auth().currentUser.uid" below in "getUserGoals" to get user id???
-      GoalFactory.addNewGoal($scope.goalItems).then(data => {
-        // $location.location.href = "#!/user-page";
-        $window.location.href = "#!/user-page";
-        //WHY $WINDOW?????
-      });
+    $scope.goToCategoryPage = (categoryId) => {
+        $location.url(`/categories/${categoryId}`);
     };
 
-    //getting goals
-
-    $scope.goalItems = {
-        name: "",
-        description: "",
-        accomplished: false,
-        categoryId: "",
-        //NEED AN NG-OPTION FOR DROPDOWN ON IMPORTANCE
-      };
-
-    GoalFactory.getUserGoals()
-      .then(goalsData => {
-        if (goalsData.length > 0) {
-          $scope.goals = goalsData;
-        } else {
-          $scope.message = "Add some categories, and start getting productive!";
-        }
-      })
-      .catch(err => {
-        console.log(err);
-      });
   });
