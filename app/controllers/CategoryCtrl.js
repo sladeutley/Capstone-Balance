@@ -49,7 +49,6 @@ angular
     //deleting goals
 
     $scope.deleteUserGoal = goalId => {
-        console.log('goalId',goalId);
       GoalFactory.deleteGoal(goalId)
       .then(() => {
           GoalFactory.getUserGoals();

@@ -10,6 +10,7 @@
 <div ng-repeat="category in categories">
     <!-- could I use ng-href here? -->
     <a ng-click="goToCategoryPage(category.id)">{{category.name}}</a>
+    <button class="delete-category-btn" ng-click="deleteUserCategory(category.id)">delete category</button>
         
         
 </div>

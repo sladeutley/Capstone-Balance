@@ -7,8 +7,7 @@ angular
     $window,
     $location,
     CategoryFactory,
-    GoalFactory,
-    UserFactory
+    $route
   ) {
     //GET CATEGORIES
     $scope.labels = [];
@@ -35,7 +34,15 @@ angular
     });
 
     //delete category function
-    //WHEN DELETE BOARD, DOES IT DELETE GOALS TOO IN THE FIREBASE?????
+    //WHEN DELETE BOARD, DOES IT DELETE GOALS TOO IN THE FIREBASE????? no
+
+    $scope.deleteUserCategory = categoryId => {
+        CategoryFactory.deleteCategory(categoryId)
+        .then(() => {
+            CategoryFactory.getCategories();
+            $route.reload();
+        });
+      };
 
     $scope.goToCategoryPage = (categoryId) => {
         $location.url(`/categories/${categoryId}`);
