@@ -35,6 +35,7 @@ angular
 
     //delete category function
     //WHEN DELETE BOARD, DOES IT DELETE GOALS TOO IN THE FIREBASE????? no
+    // actually do I want it to do that? Bc what if I have a goal autosuggestion thing, do I want the suggestions to be of all goals ever created or just the ones currently posted
 
     $scope.deleteUserCategory = categoryId => {
         CategoryFactory.deleteCategory(categoryId)

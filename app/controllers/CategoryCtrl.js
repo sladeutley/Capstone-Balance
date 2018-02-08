@@ -46,6 +46,21 @@ angular
         console.log(err);
       });
 
+    //updating goals
+
+    //TO DO: REVERT BACK TO FALSE WHEN UNCLICKED
+    $scope.isGoalAccomplished = (goalId) => {
+        $scope.setAccomplished = {accomplished: true};        
+        console.log('$scope.setAccomplished',$scope.setAccomplished);
+        GoalFactory.updateGoal(goalId, $scope.setAccomplished)
+        .then(() => {
+            GoalFactory.getUserGoals();
+            // $route.reload();
+        });
+    };
+
+    //write a function that when user reloads page, it loads the checked items
+
     //deleting goals
 
     $scope.deleteUserGoal = goalId => {
