@@ -1,4 +1,33 @@
-.nav-items {
+nav li {
   list-style-type: none;
+  cursor: pointer;
+  padding-top: .25em; 
+}
+
+nav li:hover {
+  color: rgba(85, 172, 238, 1);
+}
+
+nav ul {
+  display: flex;
+  justify-content: space-around;
+  height: 46px;
+  align-items: 0 10px;
+  padding: 0 10px;
+  padding-top: 1.3em;
+  border: 1px solid rgba(238, 238, 238, 1);
+  border-radius: 5px;
+  color: rgba(117, 117, 117, 1);
+  box-shadow: 5px 10px 20px -20px;
+}
+
+#categories {
+  cursor: pointer;
+}
+#categories:hover {
+  color: rgba(85, 172, 238, 1);
+}
+
+#delete-category-btn {
   cursor: pointer;
 }
