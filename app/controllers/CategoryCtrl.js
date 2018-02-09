@@ -5,10 +5,12 @@ angular
   .controller("CategoryCtrl", function(
     $scope,
     GoalFactory,
+    CategoryFactory,
     $routeParams,
     $window,
     $route
   ) {
+
     //adding goals
     let CategoryId = $routeParams.id;
     $scope.goalItems = {
@@ -43,6 +45,18 @@ angular
       })
       .catch(err => {
         console.log(err);
+      });
+
+      //get category name
+
+      CategoryFactory.getCategories()
+      .then (categoriesData => {
+          categoriesData.forEach((category) => {
+            //COULD I DO BRACKET NOTATION HERE?
+            if ($scope.goalItems.categoryId == category.id) {
+                $scope.categoryName = category.name;
+            } 
+          });
       });
 
     //updating goals

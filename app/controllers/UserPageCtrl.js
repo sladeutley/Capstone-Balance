@@ -46,7 +46,16 @@ angular
       };
 
     $scope.goToCategoryPage = (categoryId) => {
+        console.log('categoryId',categoryId);
         $location.url(`/categories/${categoryId}`);
     };
 
+
+    //compare index of click to index of $scope.labels. $scope.labels[]
+    $scope.goToCategory = (event) => {
+        console.log('$scope.categories[event[0]._index].id',$scope.categories[event[0]._index].id);
+        let url = `/categories/${$scope.categories[event[0]._index].id}`;
+        $location.path(url);
+        $scope.$apply();
+    };
   });
