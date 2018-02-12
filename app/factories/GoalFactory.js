@@ -51,7 +51,7 @@ angular.module("balance").factory("GoalFactory", (FBUrl, $http, $q, $routeParams
     });
   }
 
-  function updateGoal(goalId, goalItem) {
+  function updateAccomplishedGoal(goalId, goalItem) {
     return $q((resolve, reject) => {
       $http
         .patch(`${FBUrl}/goals/${goalId}.json`, JSON.stringify(goalItem))
@@ -64,17 +64,31 @@ angular.module("balance").factory("GoalFactory", (FBUrl, $http, $q, $routeParams
     });
   }
 
-  // function updateGoal(goal, goalId) {
-  //   return $q((resolve, reject) => {
-  //     $http
-  //       .patch(`${FBUrl}/goals/${goalId}.json`, JSON.stringify(goal))
-  //       .then(data => {
-  //         resolve(data);
-  //       })
-  //       .catch(err => {
-  //         reject(err);
-  //       });
-  //   });
-  // }
-  return { addNewGoal, getUserGoals, deleteGoal, updateGoal };
+  //need to get specific goal to update just that goal
+  function getUserGoal(goalId) {
+    return $q((resolve, reject) => {
+      $http 
+        .get(`${FBUrl}/goals/${goalId}.json`)
+        .then(goal => {
+          resolve(goal);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  }
+
+  function updateUserGoal(goalId, goalItem) {
+    return $q((resolve, reject) => {
+      $http
+        .put(`${FBUrl}/goals/${goalId}.json`, JSON.stringify(goalItem))
+        .then(data => {
+          resolve(data);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  }
+  return { addNewGoal, getUserGoals, deleteGoal, getUserGoal, updateAccomplishedGoal, updateUserGoal };
 });

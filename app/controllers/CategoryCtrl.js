@@ -39,6 +39,7 @@ angular
       .then(goalsData => {
         if (goalsData.length > 0) {
           $scope.goals = goalsData;
+          console.log('$scope.goals',$scope.goals);
         } else {
           $scope.message = "Add some categories, and start getting productive!";
         }
@@ -61,7 +62,23 @@ angular
 
     //updating goals
 
-    //TO DO: REVERT BACK TO FALSE WHEN UNCLICKED
+    $scope.updateCurrentGoal = goalId => {
+      GoalFactory.getUserGoal(goalId)
+      .then( (goal) => {
+        console.log('goal',goal);
+        $scope.goalItems = goal.data;
+        console.log('$scope.goalItems',$scope.goalItems);
+    });
+  };
+
+    // $scope.updateCurrentGoal = ()  => {
+    //   GoalFactory.updateUserGoal($routeParams.id, $scope.goalToUpdate)
+    //   .then( (data) => {
+    //     console.log('update button data',data);
+    //   });
+    // };
+
+    //REVERT BACK TO FALSE WHEN UNCLICKED
     $scope.isGoalAccomplished = goalId => {
       //for some reason, couldn't pass in $scope.goalList.accomplished and had to create new object with same name(accomplished) to replace the old one and change it to true
       //PROBABLY NOT THE RIGHT WAY TO DO THIS
@@ -73,7 +90,7 @@ angular
         $scope.setAccomplished = { accomplished: false };
         console.log("goal unchecked");
       }
-      GoalFactory.updateGoal(goalId, $scope.setAccomplished).then(() => {
+      GoalFactory.updateAccomplishedGoal(goalId, $scope.setAccomplished).then(() => {
         GoalFactory.getUserGoals();
         // $route.reload();
       });

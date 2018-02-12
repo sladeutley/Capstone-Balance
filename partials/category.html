@@ -9,19 +9,29 @@
         {{goal.name}}:
         {{goal.description}}
         <button class="delete-goal-btn" ng-click="deleteUserGoal(goal.id)">delete goal</button>
+        <button class="update-goal-btn" ng-click="updateCurrentGoal(goal.id)">edit goal</button>
     </div>
 </div>
+
+<!-- <div class="modal is-active">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+          Any other Bulma elements you want
+          <h5>hello</h5>
+        </div>
+        <button class="modal-close is-large" aria-label="close"></button>
+</div> --> 
 
 <div>
         <h1>Add Goal</h1>
         <h3>{{name}}</h3>
         <div>
             <label>Goal Name</label>
-            <input type="text" placeholder='goal name' ng-model="goalItems.name" ng-value="item.name">
+            <input type="text" placeholder='goal name' ng-model="goalItems.name">
         </div>
         <div>
             <label>Description</label>
-            <input type="text" placeholder="goal description" ng-model="goalItems.description" ng-value="item.description">
+            <input type="text" placeholder="goal description" ng-model="goalItems.description" ng-value="goal.description">
         </div>
         <button ng-click="addGoal()">Add Goal!</button>
     </div> 

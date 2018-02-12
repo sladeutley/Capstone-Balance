@@ -22,6 +22,7 @@ angular
         name: "login",
         url: "#!/login",
         bang: "!"
+        // hideWhenLoggedIn: true
       },
       {
         name: "user page",
@@ -29,7 +30,11 @@ angular
       },
       {
         name: "new category",
-        url: "#!/categories/new",
+        url: "#!/categories/new"
+      },
+      {
+        name: "logout",
+        url: "#!/logout"
       }
     ];
 
@@ -48,12 +53,13 @@ angular
       console.log("navUrl", navUrl);
       if (navUrl === "#!/logout") {
         UserFactory.logoutUser();
+        //NEED TO GET IT SO IF USER CHANGES URL, IT GOES BACK TO /LOGIN IN URL
       } else {
         $window.location.href = navUrl;
       }
     };
 
-    $scope.logout = () =>{
-      UserFactory.logoutUser();
-    };
+    // $scope.logout = () =>{
+    //   UserFactory.logoutUser();
+    // };
   });
