@@ -67,9 +67,20 @@ angular
       .then( (goal) => {
         console.log('goal',goal);
         $scope.goalItems = goal.data;
+        $scope.goalItems.id = goalId;
+        console.log('$scope.goalItems.id',$scope.goalItems.id);
         console.log('$scope.goalItems',$scope.goalItems);
     });
   };
+
+    $scope.updateGoal = () => {
+      console.log('$scope.goalItems',$scope.goalItems);
+      GoalFactory.updateUserGoal($scope.goalItems.id, $scope.goalItems) 
+      .then ((goal) => {
+        console.log('goal in update goal',goal);
+        $route.reload();
+      });
+    };
 
     // $scope.updateCurrentGoal = ()  => {
     //   GoalFactory.updateUserGoal($routeParams.id, $scope.goalToUpdate)
@@ -86,6 +97,7 @@ angular
       if (checkbox.checked) {
         console.log("goal checked");
         $scope.setAccomplished = { accomplished: true };
+        checkbox.checked = true;
       } else {
         $scope.setAccomplished = { accomplished: false };
         console.log("goal unchecked");

@@ -53,6 +53,7 @@ angular.module("balance").factory("GoalFactory", (FBUrl, $http, $q, $routeParams
 
   function updateAccomplishedGoal(goalId, goalItem) {
     return $q((resolve, reject) => {
+      console.log("this is being called");
       $http
         .patch(`${FBUrl}/goals/${goalId}.json`, JSON.stringify(goalItem))
         .then(data => {
