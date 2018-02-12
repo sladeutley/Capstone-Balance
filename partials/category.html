@@ -5,7 +5,7 @@
     <h3>GOALS!</h3>
     <div ng-repeat="goal in goals">
             <!-- &#10004 -->
-        <input ng-click="isGoalAccomplished(goal.id)" id="checkbox" type="checkbox">
+        <input ng-click="isGoalAccomplished(goal.id)" ng-checked="goal.accomplished" id="checkbox" type="checkbox">
         {{goal.name}}:
         {{goal.description}}
         <button class="delete-goal-btn" ng-click="deleteUserGoal(goal.id)">delete goal</button>
