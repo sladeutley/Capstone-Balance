@@ -10,9 +10,36 @@ angular
     $route, 
     $routeParams
   ) {
+
+        //add category
+
+        $scope.categoryItems = {
+          name: "",
+          importance: ""
+          //NEED AN NG-OPTION FOR DROPDOWN ON IMPORTANCE
+        };
+        $scope.addCategory = () => {
+        console.log("a new category was added", $scope.categoryItems);
+          $scope.categoryItems.uid = firebase.auth().currentUser.uid;
+          CategoryFactory.addCategory($scope.categoryItems).then(data => {
+            // $location.location.href = "#!/user-page";
+            CategoryFactory.getCategories();
+            $route.reload();
+            // $window.location.href = "#!/user-page";
+            //WHY $WINDOW?????
+          });
+        };
+
     //GET CATEGORIES
     $scope.labels = [];
     $scope.data = [];
+    $scope.type = 'polarArea';
+
+    //ITS TOGGLING BUT NEEDS TO DISPLAY DIFFERENT DATA
+    $scope.toggle = function () {
+      $scope.type = $scope.type === 'polarArea' ?
+        'pie' : 'polarArea';
+    };
 
     $scope.categoryIds = [];
 
@@ -47,19 +74,23 @@ angular
       };
 
     //update category
-      CategoryFactory.getUserCategory($routeParams.id)
+    $scope.updateSelectedCategory = categoryId => {
+      CategoryFactory.getUserCategory(categoryId)
       .then((category) => {
         console.log('category',category);
-        $scope.category = category;
+        $scope.categoryItems = category.data;
+        $scope.categoryItems.id = categoryId;
       });
+    };
 
 
-    $scope.updateSelectedCategory = (categoryId) => {
+    $scope.updateUserCategory = () => {
       console.log('$scope.category',$scope.category);
-      console.log('categoryId',categoryId);
-      CategoryFactory.updateCategory($scope.category, categoryId)
+      console.log('$scope.category.id',$scope.category.id);
+      CategoryFactory.updateCategory($scope.category.id, $scope.category)
       .then( (data) => {
-        $location.url(`/categories/new/${categoryId}`);
+        $route.reload();
+        // $location.url(`/categories/new/${categoryId}`);
       });
     };
 
@@ -79,4 +110,6 @@ angular
         $location.path(url);
         $scope.$apply();
     };
+
+
   });

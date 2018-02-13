@@ -6,9 +6,13 @@
 <!-- <canvas id="polar-area" class="chart chart-polar-area"
   chart-data="data" chart-labels="labels" chart-options="options" chart-click="goToCategory">
 </canvas>  -->
-<canvas id="pie" class="chart chart-pie"
+<!-- <canvas id="pie" class="chart chart-pie"
   chart-data="data" chart-labels="labels" chart-options="options" chart-click="goToCategory">
+</canvas>  -->
+<canvas id="base" class="chart-base" chart-type="type"
+  chart-data="data" chart-labels="labels" chart-click="goToCategory">
 </canvas> 
+<button ng-click="toggle()">Toggle</button>
 <!-- </div> -->
 <h2>Categories</h2>
 <div id="categories" ng-repeat="category in categories">
@@ -16,5 +20,35 @@
     <a ng-click="goToCategoryPage(category.id)">{{category.name}}</a>
     <button id="delete-category-btn" ng-click="deleteUserCategory(category.id)">delete category</button>
     <button id="update-category-btn" ng-click="updateSelectedCategory(category.id)">update category</button>       
+</div>
+
+<div>
+    <h1>Add Category</h1>
+    <h3>{{name}}</h3>
+    <div>
+        <label>Category Title</label>
+        <input type="text" placeholder='for example, "fitness, social-life, work, etc.""' ng-model="categoryItems.name">
+        <!-- deleted ng-value, what does that even do????? -->
+    </div>
+    <div>
+        <label>Category Importance</label>
+        <!-- <input type="text" placeholder="type a number from 1 to 10" ng-model="categoryItems.importance" ng-value="item.importance"> -->
+                <!-- I'm sure there's an easier way to do this!!!! -->
+        <select ng-model="categoryItems.importance">
+            <!-- 1-10 - CANT GET THIS AS A PLACEHOLDER -->
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>           
+        </select>
+    </div>
+    <button ng-click="addCategory()">Add Category!</button>
+    <button ng-click="updateUserCategory()">Update Category!</button>
 </div>
 

@@ -19,21 +19,21 @@ angular
 
     $scope.navItems = [
       {
-        name: "login",
+        name: "Login",
         url: "#!/login",
         bang: "!"
         // hideWhenLoggedIn: true
       },
       {
-        name: "user page",
+        name: "Home",
         url: "#!/user-page",
       },
+      // {
+      //   name: "new category",
+      //   url: "#!/categories/new"
+      // },
       {
-        name: "new category",
-        url: "#!/categories/new"
-      },
-      {
-        name: "logout",
+        name: "Logout",
         url: "#!/logout"
       }
     ];

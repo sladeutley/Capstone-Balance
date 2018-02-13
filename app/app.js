@@ -29,11 +29,12 @@ angular.module("balance", ["ngRoute", 'chart.js'])
         controller: "UserPageCtrl",
         resolve: {isAuthorized}
       })
-      .when('/categories/new', {
-        templateUrl: "partials/category-new.html",
-        controller: "CategoryNewCtrl",
-        resolve: {isAuthorized}        
-      })
+      //THIS IS NOT DOING ANYTHING ANYMORE
+      // .when('/categories/new', {
+      //   templateUrl: "partials/category-new.html",
+      //   controller: "CategoryNewCtrl",
+      //   resolve: {isAuthorized}        
+      // })
       .when('/categories/:id', {
         templateUrl: 'partials/category.html',
         controller: 'CategoryCtrl',
