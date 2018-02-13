@@ -7,7 +7,8 @@ angular
     $window,
     $location,
     CategoryFactory,
-    $route
+    $route, 
+    $routeParams
   ) {
     //GET CATEGORIES
     $scope.labels = [];
@@ -45,12 +46,32 @@ angular
         });
       };
 
+    //update category
+      CategoryFactory.getUserCategory($routeParams.id)
+      .then((category) => {
+        console.log('category',category);
+        $scope.category = category;
+      });
+
+
+    $scope.updateSelectedCategory = (categoryId) => {
+      console.log('$scope.category',$scope.category);
+      console.log('categoryId',categoryId);
+      CategoryFactory.updateCategory($scope.category, categoryId)
+      .then( (data) => {
+        $location.url(`/categories/new/${categoryId}`);
+      });
+    };
+
+
+
+
     $scope.goToCategoryPage = (categoryId) => {
         console.log('categoryId',categoryId);
         $location.url(`/categories/${categoryId}`);
     };
 
-
+    //this is where when you click on a category, you go to that page
     //compare index of click to index of $scope.labels. $scope.labels[]
     $scope.goToCategory = (event) => {
         console.log('$scope.categories[event[0]._index].id',$scope.categories[event[0]._index].id);

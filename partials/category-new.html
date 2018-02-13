@@ -7,7 +7,21 @@
     </div>
     <div>
         <label>Category Importance</label>
-        <input type="text" placeholder="type a number from 1 to 10" ng-model="categoryItems.importance" ng-value="item.importance">
+        <!-- <input type="text" placeholder="type a number from 1 to 10" ng-model="categoryItems.importance" ng-value="item.importance"> -->
+                <!-- I'm sure there's an easier way to do this!!!! -->
+        <select ng-model="categoryItems.importance">
+            <!-- 1-10 - CANT GET THIS AS A PLACEHOLDER -->
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>           
+        </select>
     </div>
     <button ng-click="addCategory()">Add Category!</button>
 </div>

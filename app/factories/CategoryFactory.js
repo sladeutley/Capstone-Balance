@@ -53,6 +53,21 @@ angular.module("balance").factory("CategoryFactory", (FBUrl, $http, $q) => {
     });
   }
 
+  //need this to get specific category 
+  //MAYBE DONt NEED THIS ONCE YOU HAVE UPDATE CATEGORY ON THE CATEGORY PAGE ITSELF BC YOU WILL HAVE ACCESS TO THE CATEGORY ID
+  function getUserCategory(categoryId) {
+    return $q((resolve, reject) => {
+      $http 
+        .get(`${FBUrl}/categories/${categoryId}.json`)
+        .then(category => {
+          resolve(category);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  }
+
   function updateCategory(category, categoryId) {
     return $q((resolve, reject) => {
       $http
@@ -66,5 +81,5 @@ angular.module("balance").factory("CategoryFactory", (FBUrl, $http, $q) => {
     });
   }
 
-  return { getCategories, addCategory, deleteCategory, updateCategory };
+  return { getCategories, addCategory, deleteCategory, getUserCategory, updateCategory };
 });

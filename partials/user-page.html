@@ -3,7 +3,10 @@
 
 <!-- CANT GET IT TO SHOW ID WHEN YOU CLICK ON SPECIFIC CATEGORY BECAUSE THE CHART (IN DEVELOPER TOOLS ON BROWSER) IS IN JUST ONE GIANT DIV -->
 <!-- <div id="{{categoryIds}}"> -->
-<canvas id="polar-area" class="chart chart-polar-area"
+<!-- <canvas id="polar-area" class="chart chart-polar-area"
+  chart-data="data" chart-labels="labels" chart-options="options" chart-click="goToCategory">
+</canvas>  -->
+<canvas id="pie" class="chart chart-pie"
   chart-data="data" chart-labels="labels" chart-options="options" chart-click="goToCategory">
 </canvas> 
 <!-- </div> -->
@@ -12,7 +15,6 @@
     <!-- could I use ng-href here? -->
     <a ng-click="goToCategoryPage(category.id)">{{category.name}}</a>
     <button id="delete-category-btn" ng-click="deleteUserCategory(category.id)">delete category</button>
-        
-        
+    <button id="update-category-btn" ng-click="updateSelectedCategory(category.id)">update category</button>       
 </div>
 
