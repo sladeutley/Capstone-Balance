@@ -71,7 +71,7 @@ angular.module("balance").factory("CategoryFactory", (FBUrl, $http, $q) => {
   function updateCategory(categoryId, category) {
     return $q((resolve, reject) => {
       $http
-        .put(`${FBUrl}/goals/${categoryId}.json`, JSON.stringify(category))
+        .put(`${FBUrl}/categories/${categoryId}.json`, JSON.stringify(category))
         .then(data => {
           resolve(data);
         })
