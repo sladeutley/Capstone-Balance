@@ -17,46 +17,39 @@ angular
     $scope.type = "pie";
 
     $scope.categoryIds = [];
-    console.log('$scope.categoryIds',$scope.categoryIds);
-    console.log('$scope.categories THAT I NEED',$scope.categories);
+    console.log("$scope.categoryIds", $scope.categoryIds);
+    console.log("$scope.categories THAT I NEED", $scope.categories);
     // $scope.categories = "";
 
     let setPieChartData = () => {
-    $scope.loaded = false;
-    CategoryFactory.getCategories().then(categoriesData => {
-      if (categoriesData.length > 0) {
-        //doing this bc not able to click on category on pie chart yet
-        $scope.categories = categoriesData;
-        console.log('$scope.categories THAT I NEED',$scope.categories);
-        console.log('categoriesData Ids THAT I NEED',categoriesData.id);
-        //
-        $scope.categoryIds = [];
-        categoriesData.forEach(category => {
-          //TRYING TO GIVE EACH CATEGORY AN ID SO WHEN YOU CLICK ON IT, IT ONLY GIVES YOU THAT CATEGORY'S GOALS
-          $scope.categoryIds.push(category.id);
+      $scope.loaded = false;
+      CategoryFactory.getCategories().then(categoriesData => {
+        if (categoriesData.length > 0) {
+          //doing this bc not able to click on category on pie chart yet
+          $scope.categories = categoriesData;
+          console.log("$scope.categories THAT I NEED", $scope.categories);
+          console.log("categoriesData Ids THAT I NEED", categoriesData.id);
           //
-          $scope.labels.push(category.name);
-          $scope.data.push(category.importance);
-        });
-        $scope.loaded = true;
-        console.log("$scope.categoryIds", $scope.categoryIds);
-      } else {
-        $scope.message = "Add some categories!";
-      }
-    });
-  };
+          $scope.categoryIds = [];
+          categoriesData.forEach(category => {
+            //TRYING TO GIVE EACH CATEGORY AN ID SO WHEN YOU CLICK ON IT, IT ONLY GIVES YOU THAT CATEGORY'S GOALS
+            $scope.categoryIds.push(category.id);
+            //
+            $scope.labels.push(category.name);
+            $scope.data.push(category.importance);
+          });
+          $scope.loaded = true;
+          console.log("$scope.categoryIds", $scope.categoryIds);
+        } else {
+          $scope.message = "Add some categories!";
+        }
+      });
+    };
+    
+    //execute get categories function
+    setPieChartData();
 
-  setPieChartData();
-
-    //function to get new data when press toggle button
-    // GoalFactory.getUserGoalsForPolarArea(categoryId).then(goalsData => {
-    //   console.log('goalsData in polarArea',goalsData);
-    // });
-
-    // GoalFactory.getAllGoals().then(goals => {
-    //   console.log('goal for get all goals',goals);
-    // });
-
+    //toggle between pie and polarArea chart
     let toggleData = () => {
       $scope.loaded = false;
       if ($scope.type === "pie") {
@@ -74,25 +67,32 @@ angular
                 counter++;
               }
             });
-            let goalsAccomplishedPercentage = Math.floor((counter / goalLength) * 100);
-            console.log('goalsAccomplishedPercentage',goalsAccomplishedPercentage);
+            let goalsAccomplishedPercentage = Math.floor(
+              counter / goalLength * 100
+            );
+            console.log(
+              "goalsAccomplishedPercentage",
+              goalsAccomplishedPercentage
+            );
             // $scope.data = goalsAccomplishedPercentage;
             // $scope.data = (counter / goalLength) * 100;
             // $scope.data.map(jer => jer*2);
-            if (!isNaN(goalsAccomplishedPercentage)) { //isNaN checks out to see if it is NaN, and ! negates it all
+            if (!isNaN(goalsAccomplishedPercentage)) {
+              //isNaN checks out to see if it is NaN, and ! negates it all
               $scope.data.push(goalsAccomplishedPercentage);
-              console.log('$scope.data',$scope.data);
+              console.log("$scope.data", $scope.data);
             } else {
               $scope.data.push(0);
             }
           });
-        // });
+          // });
           // $scope.data = [1, 2, 3, 4, 5, 6];
         });
         $scope.loaded = true;
       }
     };
 
+    //execute toggleData function
     //ITS TOGGLING BUT NEEDS TO DISPLAY DIFFERENT DATA
     $scope.toggle = function() {
       $scope.type = $scope.type === "pie" ? "polarArea" : "pie";
@@ -132,7 +132,9 @@ angular
     };
 
     //update category
+    //gets category data and sets it to $scope variables to be used later
     $scope.updateSelectedCategory = categoryId => {
+      $scope.toggleModalAddCategory();
       CategoryFactory.getUserCategory(categoryId).then(category => {
         console.log("category", category);
         $scope.categoryItems = category.data;
@@ -140,6 +142,7 @@ angular
       });
     };
 
+    //function that actually updates a category when update button is clicked
     $scope.updateUserCategory = () => {
       console.log("$scope.categoryItems", $scope.categoryItems);
       console.log("$scope.categoryItems.id", $scope.categoryItems.id);
@@ -155,12 +158,13 @@ angular
       });
     };
 
+    //go to category page when you click on listed category
     $scope.goToCategoryPage = categoryId => {
       console.log("categoryId", categoryId);
       $location.url(`/categories/${categoryId}`);
     };
 
-    //this is where when you click on a category, you go to that page
+    //this is where when you click on a category in chart, you go to that page
     //compare index of click to index of $scope.labels. $scope.labels[]
     $scope.goToCategory = event => {
       console.log(
@@ -170,5 +174,21 @@ angular
       let url = `/categories/${$scope.categories[event[0]._index].id}`;
       $location.path(url);
       $scope.$apply();
+    };
+
+    //place modal don't know what this was doing
+    // $scope.placeModal = () => {
+    //   let modal = document.querySelector('.modal');
+    //   $scope.cartegoryIdVar = this.board.id;
+    //   modal.classList.toggle("is-active");
+    // };
+
+    //toggle modal
+    $scope.toggleModalSeeCategories = () => {
+      document.querySelector('#seeCategories').classList.toggle("is-active");
+    };
+
+    $scope.toggleModalAddCategory = () => {
+      document.querySelector('#addCategory').classList.toggle("is-active");
     };
   });
