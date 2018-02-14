@@ -5,9 +5,10 @@
     <h3>GOALS!</h3>
     <div ng-repeat="goal in goals">
             <!-- &#10004 -->
-        <input ng-click="isGoalAccomplished(goal.id)" ng-checked="goal.accomplished" id="checkbox" type="checkbox">
-        {{goal.name}}:
-        {{goal.description}}
+            {{goal.id}} needs to be specific id for each check mark
+        <input ng-click="isGoalAccomplished(goal.id)" ng-checked="goal.accomplished" id="checkbox{{goal.id}}" type="checkbox">
+        {{goal.goal}}:
+        {{goal.details}}
         <button class="delete-goal-btn" ng-click="deleteUserGoal(goal.id)">delete goal</button>
         <button class="update-goal-btn" ng-click="updateCurrentGoal(goal.id)">edit goal</button>
     </div>
@@ -25,12 +26,12 @@
                         <h1>Add Goal</h1>
                         <h3>{{name}}</h3>
                         <div>
-                            <label>Goal Name</label>
-                            <input type="text" placeholder='goal name' ng-model="goalItems.name">
+                            <label>Goal</label>
+                            <input type="text" placeholder='enter your goal here' ng-model="goalItems.goal">
                         </div>
                         <div>
-                            <label>Description</label>
-                            <input type="text" placeholder="goal description" ng-model="goalItems.description" ng-value="goal.description">
+                            <label>details</label>
+                            <input type="text" placeholder="goal details" ng-model="goalItems.details" ng-value="goal.details">
                         </div>
                         <button ng-click="addGoal()">Add Goal!</button>
                         <button ng-click="updateGoal()">Update Goal!</button>

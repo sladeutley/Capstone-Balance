@@ -14,8 +14,8 @@ angular
     //adding goals
     let CategoryId = $routeParams.id;
     $scope.goalItems = {
-      name: "",
-      description: "",
+      goal: "",
+      details: "",
       accomplished: false,
       categoryId: CategoryId
       //NEED AN NG-OPTION FOR DROPDOWN ON IMPORTANCE
@@ -94,7 +94,8 @@ angular
     $scope.isGoalAccomplished = goalId => {
       //for some reason, couldn't pass in $scope.goalList.accomplished and had to create new object with same name(accomplished) to replace the old one and change it to true
       //PROBABLY NOT THE RIGHT WAY TO DO THIS
-      let checkbox = document.getElementById("checkbox");
+      let checkbox = document.getElementById(`checkbox${goalId}`);
+      console.log('checkbox',checkbox);
       if (checkbox.checked) {
         console.log("goal checked");
         $scope.setAccomplished = { accomplished: true };
@@ -102,6 +103,7 @@ angular
       } else {
         $scope.setAccomplished = { accomplished: false };
         console.log("goal unchecked");
+        checkbox.checked = false;
       }
       GoalFactory.updateAccomplishedGoal(goalId, $scope.setAccomplished).then(() => {
         GoalFactory.getUserGoals();

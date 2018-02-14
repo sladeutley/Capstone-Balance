@@ -58,8 +58,17 @@ angular
       } else if ($scope.type === "polarArea") {
         let goalLength = null;
         $scope.data = [];
+        let promiseArr = [];
         $scope.categories.forEach(category => {
-          GoalFactory.getUserGoalsForPolarArea(category.id).then(goalsData => {
+          
+          promiseArr.push(GoalFactory.getUserGoalsForPolarArea(category.id));
+          
+          
+        });
+          Promise.all(promiseArr)
+          .then(goalsData => {
+            //did a promise all so that I had all the information before manipulating the data
+            console.log('goalsData',goalsData);
             goalLength = goalsData.length;
             let counter = 0;
             goalsData.forEach(goal => {
@@ -87,7 +96,7 @@ angular
           });
           // });
           // $scope.data = [1, 2, 3, 4, 5, 6];
-        });
+
         $scope.loaded = true;
       }
     };
@@ -102,12 +111,12 @@ angular
     };
 
     //add category
-
     $scope.categoryItems = {
       name: "",
       importance: ""
       //NEED AN NG-OPTION FOR DROPDOWN ON IMPORTANCE
     };
+
     $scope.addCategory = () => {
       console.log("a new category was added", $scope.categoryItems);
       $scope.categoryItems.uid = firebase.auth().currentUser.uid;
@@ -135,6 +144,7 @@ angular
     //gets category data and sets it to $scope variables to be used later
     $scope.updateSelectedCategory = categoryId => {
       $scope.toggleModalAddCategory();
+      $scope.catId = categoryId;
       CategoryFactory.getUserCategory(categoryId).then(category => {
         console.log("category", category);
         $scope.categoryItems = category.data;
@@ -190,6 +200,12 @@ angular
     };
 
     $scope.toggleModalAddCategory = () => {
+      $scope.catId = ""; //need to clear these variables for the ng-show and ng-hide in the html so its not attached to previous scope(ids clicked)
+      $scope.categoryItems = {
+        name: "",
+        importance: ""
+        //NEED AN NG-OPTION FOR DROPDOWN ON IMPORTANCE
+      };
       // $scope.toggleModalSeeCategories();
       document.querySelector('#addCategory').classList.toggle("is-active");
     };

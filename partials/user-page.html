@@ -78,8 +78,9 @@
             <option value="10">10</option>           
             </select>
             </div>
-    <button ng-click="addCategory()">Add Category!</button>
-    <button ng-click="updateUserCategory()">Update Category!</button>
+    <button ng-hide="catId" ng-click="addCategory()">Add Category!</button>
+    <button ng-show="catId"
+    ng-click="updateUserCategory()">Update Category!</button>
             </section>
         </div>
     <!-- <button ng-click="toggleModal()"></button> -->
