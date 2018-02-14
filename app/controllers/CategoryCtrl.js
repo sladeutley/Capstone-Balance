@@ -63,6 +63,7 @@ angular
     //updating goals
 
     $scope.updateCurrentGoal = goalId => {
+      $scope.toggleModalAddGoal();
       GoalFactory.getUserGoal(goalId)
       .then( (goal) => {
         console.log('goal',goal);
@@ -118,4 +119,15 @@ angular
         $route.reload();
       });
     };
+
+        //toggle modal
+      $scope.toggleModalSeeGoals = () => {
+        // $scope.toggleModalAddCategory(); TRYing to get a way to remove last toggle
+        document.querySelector('#seeGoals').classList.toggle("is-active");
+      };
+
+      $scope.toggleModalAddGoal = () => {
+        // $scope.toggleModalSeeCategories();
+        document.querySelector('#addGoal').classList.toggle("is-active");
+      };
   });

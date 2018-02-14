@@ -185,10 +185,12 @@ angular
 
     //toggle modal
     $scope.toggleModalSeeCategories = () => {
+      // $scope.toggleModalAddCategory(); TRYing to get a way to remove last toggle
       document.querySelector('#seeCategories').classList.toggle("is-active");
     };
 
     $scope.toggleModalAddCategory = () => {
+      // $scope.toggleModalSeeCategories();
       document.querySelector('#addCategory').classList.toggle("is-active");
     };
   });
