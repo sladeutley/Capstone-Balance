@@ -10,10 +10,10 @@
 <!-- <canvas id="pie" class="chart chart-pie"
   chart-data="data" chart-labels="labels" chart-options="options" chart-click="goToCategory">
 </canvas>  -->
-<canvas ng-if="loaded" id="base" class="chart-base" chart-type="type"
+<canvas  ng-if="loaded" id="base" class="chart-base" chart-type="type"
   chart-data="data" chart-labels="labels" chart-click="goToCategory">
 </canvas> 
-<button ng-click="toggle(category.id)">Toggle</button>
+<button ng-click="toggle()">Toggle</button>
 <br>
 <br>
 <div>
@@ -48,7 +48,8 @@
     <div class="modal-background" ng-click="toggleModalAddCategory()"></div>
         <div class="modal-card">
                 <header class="modal-card-head">
-                    <p class="modal-card-title">Add/Edit Category</p>
+                    <p ng-hide="catId" class="modal-card-title">Add Category</p>
+                    <p ng-show="catId" class="modal-card-title">Edit Category</p>
                     <button class="delete" aria-label="close" ng-click="toggleModalAddCategory()"></button>
                 </header>
                 <section class="modal-card-body">
@@ -84,17 +85,4 @@
             </section>
         </div>
     <!-- <button ng-click="toggleModal()"></button> -->
-</div>
-
-<div class="modal">
-    <div class="modal-background">
-        <div class="modal-content">
-                <header class="modal-card-head">
-                    <p class="modal-card-title">Add/Edit Category</p>
-                    <button class="delete" aria-label="close" ng-click="toggleModalAddCategory()"></button>
-                </header>
-                <section class="modal-card-body">
-                </section>
-        </div>
-    </div>
 </div>

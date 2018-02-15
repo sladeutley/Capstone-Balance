@@ -15,28 +15,28 @@
 </div>
 <!-- <button class="button" ng-click="toggleModalSeeCategories()">See Categories</button> -->
 <button class="button" ng-click="toggleModalAddGoal()">Add Goal</button>
+
 <div class="modal" id="addGoal">
-        <div class="modal-background">
-            <div class="modal-content">
-                    <header class="modal-card-head">
-                        <p class="modal-card-title">Add/Edit Category</p>
-                        <button class="delete" aria-label="close" ng-click="toggleModalAddGoal()"></button>
-                    </header>
-                    <section class="modal-card-body">
-                        <h1>Add Goal</h1>
-                        <h3>{{name}}</h3>
-                        <div>
-                            <label>Goal</label>
-                            <input type="text" placeholder='enter your goal here' ng-model="goalItems.goal">
-                        </div>
-                        <div>
-                            <label>details</label>
-                            <input type="text" placeholder="goal details" ng-model="goalItems.details" ng-value="goal.details">
-                        </div>
-                        <button ng-click="addGoal()">Add Goal!</button>
-                        <button ng-click="updateGoal()">Update Goal!</button>
-                    </section>
-            </div>
+    <div class="modal-background"></div>
+        <div class="modal-card">
+                <header class="modal-card-head">
+                    <p ng-hide="gId" class="modal-card-title">Add Goal</p>
+                    <p ng-show="gId" class="modal-card-title">Edit Category</p>
+                    <button class="delete" aria-label="close" ng-click="toggleModalAddGoal()"></button>
+                </header>
+                <section class="modal-card-body">
+                    <h3>{{name}}</h3>
+                    <div>
+                        <label>Goal</label>
+                        <input type="text" placeholder='enter your goal here' ng-model="goalItems.goal">
+                    </div>
+                    <div>
+                        <label>details</label>
+                        <input type="text" placeholder="goal details" ng-model="goalItems.details" ng-value="goal.details">
+                    </div>
+                    <button ng-hide="gId" ng-click="addGoal()">Add Goal!</button>
+                    <button ng-show="gId" ng-click="updateGoal()">Update Goal!</button>
+                </section>
         </div>
-    </div>
+</div>
 

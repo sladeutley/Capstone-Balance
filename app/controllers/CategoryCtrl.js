@@ -27,6 +27,7 @@ angular
       //COULD I USE A "firebase.auth().currentUser.uid" below in "getUserGoals" to get user id???
       GoalFactory.addNewGoal($scope.goalItems).then(data => {
         // $location.location.href = "#!/user-page";
+        GoalFactory.getUserGoals();
         $route.reload();
         //   $window.location.href = "#!/user-page";
         //WHY $WINDOW?????
@@ -64,6 +65,7 @@ angular
 
     $scope.updateCurrentGoal = goalId => {
       $scope.toggleModalAddGoal();
+      $scope.gId = goalId;
       GoalFactory.getUserGoal(goalId)
       .then( (goal) => {
         console.log('goal',goal);
@@ -79,6 +81,7 @@ angular
       GoalFactory.updateUserGoal($scope.goalItems.id, $scope.goalItems) 
       .then ((goal) => {
         console.log('goal in update goal',goal);
+        GoalFactory.getUserGoals();
         $route.reload();
       });
     };
@@ -129,6 +132,11 @@ angular
       };
 
       $scope.toggleModalAddGoal = () => {
+        $scope.gId = "";
+        $scope.goalItems = {
+          goal: "",
+          details: "",
+        };
         // $scope.toggleModalSeeCategories();
         document.querySelector('#addGoal').classList.toggle("is-active");
       };

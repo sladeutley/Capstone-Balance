@@ -18,21 +18,17 @@ angular.module("balance").factory("GoalFactory", (FBUrl, $http, $q, $routeParams
 
 
   function getUserGoals() {
-    console.log("goal factory", firebase.auth().currentUser.uid);
     return $q((resolve, reject) => {
       $http
         .get(
           `${FBUrl}/goals.json?orderBy="categoryId"&equalTo="${$routeParams.id}"`
         )
         .then(({ data }) => {
-          console.log("goals", data);
           let goalArr = Object.keys(data).map(goalKey => {
-            console.log("goalKey", goalKey);
             data[goalKey].id = goalKey;
             //I'd LIKE TO REVIEW THIS OBJECT.KEYS - i get what its doing, just not how its working
             return data[goalKey];
           });
-          console.log("goalArr", goalArr);
           resolve(goalArr);
         });
     });
@@ -45,14 +41,11 @@ angular.module("balance").factory("GoalFactory", (FBUrl, $http, $q, $routeParams
           `${FBUrl}/goals.json?orderBy="categoryId"&equalTo="${categoryId}"`
         )
         .then(({ data }) => {
-          console.log("goals", data);
           let goalArr = Object.keys(data).map(goalKey => {
-            console.log("goalKey", goalKey);
             data[goalKey].id = goalKey;
             //I'd LIKE TO REVIEW THIS OBJECT.KEYS - i get what its doing, just not how its working
             return data[goalKey];
           });
-          console.log("goalArr", goalArr);
           resolve(goalArr);
         });
     });

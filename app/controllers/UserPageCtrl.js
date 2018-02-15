@@ -9,7 +9,8 @@ angular
     CategoryFactory,
     GoalFactory,
     $route,
-    $routeParams
+    $routeParams,
+    $q
   ) {
     //GET CATEGORIES
     $scope.labels = [];
@@ -17,19 +18,15 @@ angular
     $scope.type = "pie";
 
     $scope.categoryIds = [];
-    console.log("$scope.categoryIds", $scope.categoryIds);
-    console.log("$scope.categories THAT I NEED", $scope.categories);
-    // $scope.categories = "";
+
 
     let setPieChartData = () => {
       $scope.loaded = false;
+      $scope.data = [];
       CategoryFactory.getCategories().then(categoriesData => {
         if (categoriesData.length > 0) {
           //doing this bc not able to click on category on pie chart yet
           $scope.categories = categoriesData;
-          console.log("$scope.categories THAT I NEED", $scope.categories);
-          console.log("categoriesData Ids THAT I NEED", categoriesData.id);
-          //
           $scope.categoryIds = [];
           categoriesData.forEach(category => {
             //TRYING TO GIVE EACH CATEGORY AN ID SO WHEN YOU CLICK ON IT, IT ONLY GIVES YOU THAT CATEGORY'S GOALS
@@ -39,13 +36,12 @@ angular
             $scope.data.push(category.importance);
           });
           $scope.loaded = true;
-          console.log("$scope.categoryIds", $scope.categoryIds);
         } else {
           $scope.message = "Add some categories!";
         }
       });
     };
-    
+
     //execute get categories function
     setPieChartData();
 
@@ -60,52 +56,49 @@ angular
         $scope.data = [];
         let promiseArr = [];
         $scope.categories.forEach(category => {
-          
           promiseArr.push(GoalFactory.getUserGoalsForPolarArea(category.id));
-          
-          
         });
-          Promise.all(promiseArr)
-          .then(goalsData => {
-            //did a promise all so that I had all the information before manipulating the data
-            console.log('goalsData',goalsData);
-            goalLength = goalsData.length;
+        // Promise.all(promiseArr).then(goalsData => {
+        return $q.all(promiseArr).then(goalsData => {
+          //did a promise all so that I had all the information before manipulating the data
+          console.log("goalsData", goalsData);
+          goalsData.forEach(goalsArr => {
+            goalLength = goalsArr.length;
             let counter = 0;
-            goalsData.forEach(goal => {
-              if (goal.accomplished === true) {
+            goalsArr.forEach(goals => {
+              if (goals.accomplished === true) {
                 counter++;
               }
             });
             let goalsAccomplishedPercentage = Math.floor(
               counter / goalLength * 100
             );
-            console.log(
-              "goalsAccomplishedPercentage",
-              goalsAccomplishedPercentage
-            );
-            // $scope.data = goalsAccomplishedPercentage;
-            // $scope.data = (counter / goalLength) * 100;
-            // $scope.data.map(jer => jer*2);
             if (!isNaN(goalsAccomplishedPercentage)) {
               //isNaN checks out to see if it is NaN, and ! negates it all
               $scope.data.push(goalsAccomplishedPercentage);
-              console.log("$scope.data", $scope.data);
             } else {
               $scope.data.push(0);
             }
           });
-          // });
-          // $scope.data = [1, 2, 3, 4, 5, 6];
-
-        $scope.loaded = true;
+          console.log("$scope.data", $scope.data);
+          $scope.loaded = true;
+        });
       }
     };
 
     //execute toggleData function
     //ITS TOGGLING BUT NEEDS TO DISPLAY DIFFERENT DATA
     $scope.toggle = function() {
-      $scope.type = $scope.type === "pie" ? "polarArea" : "pie";
-      console.log("hi");
+      // $scope.type = $scope.type === "pie" ? "polarArea" : "pie";
+      if ($scope.type === "pie") {
+        $scope.type = "polarArea";
+      } else if ($scope.type === "polarArea") {
+        $route.reload(); //had to do this because it was working on first toggle, but not 3rd when going back to polarArea.
+        // $scope.type = "pie";
+      } else {
+        console.log("we done fucked up");
+      }
+      console.log('$scope.type',$scope.type);
       toggleData();
       //call get new data function here, where on 'polarArea', get the goal data so i can filter through the goal.accomplished property, push into an array, and map that to be the data i need
     };
@@ -196,7 +189,7 @@ angular
     //toggle modal
     $scope.toggleModalSeeCategories = () => {
       // $scope.toggleModalAddCategory(); TRYing to get a way to remove last toggle
-      document.querySelector('#seeCategories').classList.toggle("is-active");
+      document.querySelector("#seeCategories").classList.toggle("is-active");
     };
 
     $scope.toggleModalAddCategory = () => {
@@ -207,6 +200,6 @@ angular
         //NEED AN NG-OPTION FOR DROPDOWN ON IMPORTANCE
       };
       // $scope.toggleModalSeeCategories();
-      document.querySelector('#addCategory').classList.toggle("is-active");
+      document.querySelector("#addCategory").classList.toggle("is-active");
     };
   });
