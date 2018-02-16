@@ -12,14 +12,16 @@ angular
   ) {
 
     //adding goals
-    let CategoryId = $routeParams.id;
+    
     $scope.goalItems = {
       goal: "",
       details: "",
       accomplished: false,
-      categoryId: CategoryId
+      // categoryId: CategoryId
+      categoryId: ""
       //NEED AN NG-OPTION FOR DROPDOWN ON IMPORTANCE
     };
+    $scope.goalItems.categoryId = $routeParams.id;
 
     $scope.addGoal = () => {
       console.log("a new goal was added", $scope.goalItems);
@@ -27,7 +29,7 @@ angular
       //COULD I USE A "firebase.auth().currentUser.uid" below in "getUserGoals" to get user id???
       GoalFactory.addNewGoal($scope.goalItems).then(data => {
         // $location.location.href = "#!/user-page";
-        GoalFactory.getUserGoals();
+        // GoalFactory.getUserGoals();
         $route.reload();
         //   $window.location.href = "#!/user-page";
         //WHY $WINDOW?????
@@ -38,6 +40,8 @@ angular
 
     GoalFactory.getUserGoals()
       .then(goalsData => {
+        console.log('goalsData.length',goalsData.length);
+        console.log('goalsData',goalsData);
         if (goalsData.length > 0) {
           $scope.goals = goalsData;
           console.log('$scope.goals',$scope.goals);
@@ -133,10 +137,13 @@ angular
 
       $scope.toggleModalAddGoal = () => {
         $scope.gId = "";
-        $scope.goalItems = {
-          goal: "",
-          details: "",
-        };
+        //NEED THIS FOR WHEN AFTER CLICKING UPDATE THEN ADD, IT DOESNT STILL SHOW THE LAST UPDATED ITEMS INFO
+        //HOWEVER, WHEN THERE ARE NO GOALS, AN ID WONT ATTACH TO IT, THEN THE GOALS DONT SHOW
+        //does it need to be patched?
+        // $scope.goalItems = {
+        //   goal: "",
+        //   details: "",
+        // };
         // $scope.toggleModalSeeCategories();
         document.querySelector('#addGoal').classList.toggle("is-active");
       };

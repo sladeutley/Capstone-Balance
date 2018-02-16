@@ -1,6 +1,10 @@
-<br>
-<br>
+<div class="content">
 <h3>{{message}}</h3>
+<div>
+    <h2>Categories</h2>
+    <button class="button" ng-click="toggleModalSeeCategories()">See Categories</button>
+    <button class="button" ng-click="toggleModalAddCategory()">Add Category</button>
+</div>
 
 <!-- CANT GET IT TO SHOW ID WHEN YOU CLICK ON SPECIFIC CATEGORY BECAUSE THE CHART (IN DEVELOPER TOOLS ON BROWSER) IS IN JUST ONE GIANT DIV -->
 <!-- <div id="{{categoryIds}}"> -->
@@ -10,17 +14,21 @@
 <!-- <canvas id="pie" class="chart chart-pie"
   chart-data="data" chart-labels="labels" chart-options="options" chart-click="goToCategory">
 </canvas>  -->
-<canvas  ng-if="loaded" id="base" class="chart-base" chart-type="type"
-  chart-data="data" chart-labels="labels" chart-click="goToCategory">
-</canvas> 
-<button ng-click="toggle()">Toggle</button>
 <br>
-<br>
-<div>
-<h2>Categories</h2>
-<button class="button" ng-click="toggleModalSeeCategories()">See Categories</button>
-<button class="button" ng-click="toggleModalAddCategory()">Add Category</button>
+<div ng-hide="isItPie">
+    <h5>Shows Importance of Each Category</h5>
 </div>
+<div ng-show="isItPie">
+    <h5>Shows Percentage of Goals Completed In Category</h5>
+</div>
+<br>
+<canvas id="chart" ng-if="loaded" id="base" class="chart-base" chart-type="type"
+  chart-data= "data" chart-labels="labels" chart-colors ="colors" chart-options="labelOptions" chart-click="goToCategory">
+</canvas> 
+<button class="button" ng-hide="isItPie" ng-click="toggle()">Show Me My Progress</button>
+<button class="button" ng-show="isItPie" ng-click="toggle()">Back</button>
+<br>
+<br>
 <!-- </div> -->
 <div class="modal" id="seeCategories">
     <div class="modal-background" ng-click="toggleModalSeeCategories()"></div>
@@ -34,8 +42,8 @@
                 <div id="categories" ng-repeat="category in categories">
                     <!-- could I use ng-href here? -->
                     <a ng-click="goToCategoryPage(category.id)">{{category.name}}</a>
-                    <button id="delete-category-btn" ng-click="deleteUserCategory(category.id)">delete category</button>
-                    <button id="update-category-btn" ng-click="updateSelectedCategory(category.id)">update category</button>       
+                    <button class="button" id="delete-category-btn" ng-click="deleteUserCategory(category.id)">delete category</button>
+                    <button class="button" id="update-category-btn" ng-click="updateSelectedCategory(category.id)">update category</button>       
                 </div>
                 </section>
             <!-- </div> -->
@@ -54,35 +62,35 @@
                 </header>
                 <section class="modal-card-body">
 
-        <h1>Add Category</h1>
-        <h3>{{name}}</h3>
-            <div>
-            <label>Category Title</label>
-            <input type="text" placeholder='for example, "fitness, social-life, work, etc.""' ng-model="categoryItems.name">
-        <!-- deleted ng-value, what does that even do????? -->
-            </div>
-            <div>
-            <label>Category Importance</label>
-        <!-- <input type="text" placeholder="type a number from 1 to 10" ng-model="categoryItems.importance" ng-value="item.importance"> -->
-                <!-- I'm sure there's an easier way to do this!!!! -->
-            <select class="select" ng-model="categoryItems.importance">
-            <!-- 1-10 - CANT GET THIS AS A PLACEHOLDER -->
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>           
-            </select>
-            </div>
-    <button ng-hide="catId" ng-click="addCategory()">Add Category!</button>
-    <button ng-show="catId"
-    ng-click="updateUserCategory()">Update Category!</button>
-            </section>
+                <h1>Add Category</h1>
+                <h3>{{name}}</h3>
+                <div>
+                    <label>Category Title</label>
+                    <input type="text" placeholder='for example, "fitness, social-life, work, etc."' ng-model="categoryItems.name">
+                <!-- deleted ng-value, what does that even do????? -->
+                    </div>
+                    <div>
+                    <label>Category Importance</label>
+                <!-- <input type="text" placeholder="type a number from 1 to 10" ng-model="categoryItems.importance" ng-value="item.importance"> -->
+                        <!-- I'm sure there's an easier way to do this!!!! -->
+                    <select class="select" ng-model="categoryItems.importance">
+                    <!-- 1-10 - CANT GET THIS AS A PLACEHOLDER -->
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>           
+                    </select>
+                </div>
+                <button class="button" ng-hide="catId" ng-click="addCategory()">Add Category!</button>
+                <button class="button" ng-show="catId" ng-click="updateUserCategory()">Update Category!</button>
+                </section>
         </div>
     <!-- <button ng-click="toggleModal()"></button> -->
+</div>
 </div>

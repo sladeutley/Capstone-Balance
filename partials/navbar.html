@@ -1,17 +1,26 @@
-<nav class="navbar" ng-controller="NavCtrl">
-    <h3>Balance</h3>
-    <ul>
-        <li class="nav-items" ng-repeat="item in navItems"> 
-            <!-- PUT BELOW EVENTUALLY: ng-show="{{item.bang}}isLoggedIn" on anchor tag-->
-            <!-- ng-href="{{item.url}}" -->
-            <!-- <a ng-click="navigate(item.url)">{{item.name}}</a> -->
-            <!-- <div ng-hide="isRegistered ? link.hideWhenLoggedIn : !link.hideWhenLoggedIn"> -->
-            <a ng-show="{{item.bang}}isLoggedIn" ng-click="navigate(item.url)">{{item.name}}</a>
-            <!-- </div> -->
-            <!-- EXAMPLE OF COMMENTING CODE - ng-click is activating navigate function in NavCtrl.js -->
-        </li>
-        <!-- <li>
-            <button ng-click="logout()">logout</button>
-        </li> -->
-    </ul>
+<nav role="navigation" aria-label="main navigation">
+    <!-- <div class="navbar-brand" id="logo"> -->
+    <div class="logo">
+            <h3>Balance</h3>
+        </div>
+        <div class="logo">
+            <h5>Your Self-Improvement Productivity App</h5>  
+        </div>      
+    </div>
 </nav>
+    <div class="navs" ng-controller="NavCtrl">
+        <ul>
+            <li ng-repeat="item in navItems"> 
+                <!-- PUT BELOW EVENTUALLY: ng-show="{{item.bang}}isLoggedIn" on anchor tag-->
+                <!-- ng-href="{{item.url}}" -->
+                <!-- <a ng-click="navigate(item.url)">{{item.name}}</a> -->
+                <!-- <div ng-hide="isRegistered ? link.hideWhenLoggedIn : !link.hideWhenLoggedIn"> -->
+                <a class="nav-items" ng-show="{{item.bang}}isLoggedIn" ng-click="navigate(item.url)">{{item.name}}</a>
+                <!-- </div> -->
+                <!-- EXAMPLE OF COMMENTING CODE - ng-click is activating navigate function in NavCtrl.js -->
+            </li>
+            <!-- <li>
+                <button ng-click="logout()">logout</button>
+            </li> -->
+        </ul>
+    </div>

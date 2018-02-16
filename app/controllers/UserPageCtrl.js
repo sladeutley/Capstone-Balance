@@ -19,6 +19,38 @@ angular
 
     $scope.categoryIds = [];
 
+    // $scope.colors = [
+    //   {
+    //     borderColor: "rgba(204, 118, 161, 1)",
+    //     backgroundColor: "rgba(135, 179, 141, 1)"
+    //   }
+    // ];
+
+
+    // // options for labels on x an y axes
+    // $scope.labelOptions = {
+    //   scales: {
+    //     yAxes: [
+    //       {
+    //         ticks: {
+    //           fontColor: "white",
+    //           fontSize: 40,
+    //           stepSize: 1,
+    //           beginAtZero: true
+    //         }
+    //       }
+    //     ],
+    //     xAxes: [
+    //       {
+    //         ticks: {
+    //           fontColor: "white",
+    //           // fontSize: 20,
+    //           fontFamily: "Futura"
+    //         }
+    //       }
+    //     ]
+    //   }
+    // };
 
     let setPieChartData = () => {
       $scope.loaded = false;
@@ -92,13 +124,15 @@ angular
       // $scope.type = $scope.type === "pie" ? "polarArea" : "pie";
       if ($scope.type === "pie") {
         $scope.type = "polarArea";
+        $scope.isItPie = true; //this is to change(hide and show) message above chart when toggle button clicked
       } else if ($scope.type === "polarArea") {
         $route.reload(); //had to do this because it was working on first toggle, but not 3rd when going back to polarArea.
         // $scope.type = "pie";
+        $scope.isItPie = true;        
       } else {
         console.log("we done fucked up");
       }
-      console.log('$scope.type',$scope.type);
+      console.log("$scope.type", $scope.type);
       toggleData();
       //call get new data function here, where on 'polarArea', get the goal data so i can filter through the goal.accomplished property, push into an array, and map that to be the data i need
     };
@@ -197,7 +231,6 @@ angular
       $scope.categoryItems = {
         name: "",
         importance: ""
-        //NEED AN NG-OPTION FOR DROPDOWN ON IMPORTANCE
       };
       // $scope.toggleModalSeeCategories();
       document.querySelector("#addCategory").classList.toggle("is-active");

@@ -25,7 +25,7 @@ angular
         // hideWhenLoggedIn: true
       },
       {
-        name: "Home",
+        name: "Categories",
         url: "#!/user-page",
       },
       // {

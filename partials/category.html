@@ -1,20 +1,25 @@
-
+<div class="content">
 <h1>{{categoryName}}</h1>
 
-<div class="allGoals">
-    <h3>GOALS!</h3>
-    <div ng-repeat="goal in goals">
-            <!-- &#10004 -->
-            <!-- {{goal.id}} needs to be specific id for each check mark -->
-        <input ng-click="isGoalAccomplished(goal.id)" ng-checked="goal.accomplished" id="checkbox{{goal.id}}" type="checkbox">
-        {{goal.goal}}:
-        {{goal.details}}
-        <button class="delete-goal-btn" ng-click="deleteUserGoal(goal.id)">delete goal</button>
-        <button class="update-goal-btn" ng-click="updateCurrentGoal(goal.id)">edit goal</button>
-    </div>
+    <!-- <container class="goal-container"> -->
+        <div id="allGoals">
+            <h3>GOALS!</h3>
+            <div class="goal-container" ng-repeat="goal in goals">
+                    <!-- &#10004 -->
+                    <!-- {{goal.id}} needs to be specific id for each check mark -->
+                <input ng-click="isGoalAccomplished(goal.id)" ng-checked="goal.accomplished" id="checkbox{{goal.id}}" type="checkbox">
+                goal: {{goal.goal}}
+                <br>
+                details: {{goal.details}}
+                <br>
+                <button class="button" ng-click="deleteUserGoal(goal.id)">delete goal</button>
+                <button class="button" ng-click="updateCurrentGoal(goal.id)">edit goal</button>
+            </div>
+        </div>
+        <!-- <button class="button" ng-click="toggleModalSeeCategories()">See Categories</button> -->
+    <!-- </container> -->
+    <button class="button" ng-click="toggleModalAddGoal()">Add Goal</button>
 </div>
-<!-- <button class="button" ng-click="toggleModalSeeCategories()">See Categories</button> -->
-<button class="button" ng-click="toggleModalAddGoal()">Add Goal</button>
 
 <div class="modal" id="addGoal">
     <div class="modal-background"></div>
@@ -34,8 +39,8 @@
                         <label>details</label>
                         <input type="text" placeholder="goal details" ng-model="goalItems.details" ng-value="goal.details">
                     </div>
-                    <button ng-hide="gId" ng-click="addGoal()">Add Goal!</button>
-                    <button ng-show="gId" ng-click="updateGoal()">Update Goal!</button>
+                    <button class="button" ng-hide="gId" ng-click="addGoal()">Add Goal!</button>
+                    <button class="button" ng-show="gId" ng-click="updateGoal()">Update Goal!</button>
                 </section>
         </div>
 </div>
