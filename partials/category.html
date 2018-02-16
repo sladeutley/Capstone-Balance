@@ -7,10 +7,16 @@
             <div class="goal-container" ng-repeat="goal in goals">
                     <!-- &#10004 -->
                     <!-- {{goal.id}} needs to be specific id for each check mark -->
-                <input ng-click="isGoalAccomplished(goal.id)" ng-checked="goal.accomplished" id="checkbox{{goal.id}}" type="checkbox">
-                goal: {{goal.goal}}
-                <br>
-                details: {{goal.details}}
+                <div>
+                    <input ng-click="isGoalAccomplished(goal.id)" ng-checked="goal.accomplished" id="checkbox{{goal.id}}" type="checkbox">
+                    goal: {{goal.goal}}
+                </div>
+                <div ng-if="goal.details.length > 0">
+                    details: {{goal.details}}
+                </div>
+                <!-- <div ng-show="hasNoDetails">
+                    details: {{goal.details}}
+                </div> -->
                 <br>
                 <button class="button" ng-click="deleteUserGoal(goal.id)">delete goal</button>
                 <button class="button" ng-click="updateCurrentGoal(goal.id)">edit goal</button>
@@ -18,6 +24,7 @@
         </div>
         <!-- <button class="button" ng-click="toggleModalSeeCategories()">See Categories</button> -->
     <!-- </container> -->
+    <br>
     <button class="button" ng-click="toggleModalAddGoal()">Add Goal</button>
 </div>
 

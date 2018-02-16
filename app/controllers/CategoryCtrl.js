@@ -19,7 +19,6 @@ angular
       accomplished: false,
       // categoryId: CategoryId
       categoryId: ""
-      //NEED AN NG-OPTION FOR DROPDOWN ON IMPORTANCE
     };
     $scope.goalItems.categoryId = $routeParams.id;
 
@@ -37,6 +36,18 @@ angular
     };
 
     //getting goals
+    // $scope.determineIfHasDetails = (goal) => {
+    //   // console.log('goal.details',goal.details);
+    //   console.log('goal.details.length',goal.details.length);
+    //   if (goal.details.length === 0) {
+    //     console.log('goal for no length',goal);
+    //     $scope.hasNoDetails = true;
+    //   } else {
+    //     console.log('goal for has length',goal);
+    //     $scope.hasNoDetails = false;
+    //   }
+    //   console.log('$scope.hasNoDetails',$scope.hasNoDetails);
+    // };
 
     GoalFactory.getUserGoals()
       .then(goalsData => {
@@ -45,6 +56,25 @@ angular
         if (goalsData.length > 0) {
           $scope.goals = goalsData;
           console.log('$scope.goals',$scope.goals);
+          //to determine whether or not to display "details"
+          // goalsData.forEach(userGoal => {
+          //   $scope.determineIfHasDetails(userGoal);
+          //   console.log('$scope.determineIfHasDetails(userGoal)',$scope.determineIfHasDetails(userGoal));
+
+          // goalsData.forEach(goal => {
+          //   // $scope.determineIfHasDetails = () => {
+          //   // // console.log('goal.details',goal.details);
+          //   // console.log('goal.details.length',goal.details.length);
+          //   if (goal.details.length === 0) {
+          //     console.log('goal for no length',goal);
+          //     $scope.hasNoDetails = true;
+          //   } else if (goal.details.length > 0) {
+          //     console.log('goal for has length',goal);
+          //     $scope.hasNoDetails = false;
+          //   }
+          //   console.log('$scope.hasNoDetails',$scope.hasNoDetails);
+          // // };
+          // });          
         } else {
           $scope.message = "Add some categories, and start getting productive!";
         }
@@ -140,10 +170,14 @@ angular
         //NEED THIS FOR WHEN AFTER CLICKING UPDATE THEN ADD, IT DOESNT STILL SHOW THE LAST UPDATED ITEMS INFO
         //HOWEVER, WHEN THERE ARE NO GOALS, AN ID WONT ATTACH TO IT, THEN THE GOALS DONT SHOW
         //does it need to be patched?
-        // $scope.goalItems = {
-        //   goal: "",
-        //   details: "",
-        // };
+        $scope.goalItems = {
+          goal: "",
+          details: "",
+          accomplished: false,
+          // categoryId: CategoryId
+          categoryId: ""
+        };
+        $scope.goalItems.categoryId = $routeParams.id;
         // $scope.toggleModalSeeCategories();
         document.querySelector('#addGoal').classList.toggle("is-active");
       };
