@@ -56,6 +56,7 @@ angular
       $scope.loaded = false;
       $scope.data = [];
       CategoryFactory.getCategories().then(categoriesData => {
+        console.log('categoriesData',categoriesData);
         if (categoriesData.length > 0) {
           //doing this bc not able to click on category on pie chart yet
           $scope.categories = categoriesData;

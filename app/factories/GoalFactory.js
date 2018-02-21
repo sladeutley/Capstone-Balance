@@ -119,5 +119,5 @@ angular.module("balance").factory("GoalFactory", (FBUrl, $http, $q, $routeParams
         });
     });
   }
-  return { addNewGoal, getUserGoals, getUserGoalsForPolarArea, deleteGoal, getUserGoal, updateAccomplishedGoal, updateUserGoal };
+  return { addNewGoal, getUserGoals, getUserGoalsForPolarArea, getAllGoals, deleteGoal, getUserGoal, updateAccomplishedGoal, updateUserGoal };
 });
