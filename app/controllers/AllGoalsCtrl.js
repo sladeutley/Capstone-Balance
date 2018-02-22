@@ -2,13 +2,14 @@
 
 angular.module("balance").controller("AllGoalsCtrl", function($scope, GoalFactory){
 
-    $scope.allGoals = [];
+    
+    
     //get all goals
+    $scope.allGoals = [];
     GoalFactory.getAllGoals().then(goalsData => {
-        // if (firebase.auth().currentUser.uid === )
         let userGoals = Object.entries(goalsData);
+        console.log('userGoals.length',userGoals.length); //eventually, get it so if user has no goals, have a message saying 'add goals'
         userGoals.forEach(goal => {
-            // if (goal[1].uid )
             console.log('goal[1].uid',goal[1].uid);
             if (goal[1].uid === firebase.auth().currentUser.uid) {
 
@@ -16,8 +17,6 @@ angular.module("balance").controller("AllGoalsCtrl", function($scope, GoalFactor
             }
         });
         console.log('$scope.allGoals',$scope.allGoals);
-        // // console.log('$scope.allGoals2',$scope.allGoals2);
-        // // console.log('goalsData',goalsData);
         // if (goalsData.length > 0) {
         // } else {
         //     $scope.message = "Add some goals!";

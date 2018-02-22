@@ -1,8 +1,50 @@
-<h3>All Goals</h3>
+<!-- WHY IS THIS ALL WORKING?!?! THE NG-REPEAT IS FOR ALLGOALS BUT CHECKBOX IS WORKING? -->
+{{categoryName}}
 
-<div ng-repeat="goal in allGoals">
+<div class="content">
+    <div id="allGoals">
+        <h3>All Goals</h3>
+        <!-- <div ng-repeat="goal in allGoals"> -->
+            <div class="goal-container" ng-repeat="goal in allGoals">
 
-        {{goal.goal}}
+                <!-- {{goal.goal}} -->
+                <div>
+                    <input ng-click="isGoalAccomplished(goal.id)" ng-checked="goal.accomplished" id="checkbox{{goal.id}}" type="checkbox">
+                    goal: {{goal.goal}}
+                </div>
+                <div ng-if="goal.details.length > 0">
+                    details: {{goal.details}}
+                </div>
+                <button class="button" ng-click="deleteUserGoal(goal.id)">delete goal</button>
+                <button class="button" ng-click="updateCurrentGoal(goal.id)">edit goal</button>
+            </div>
+        <!-- </div> -->
+    </div>
+    <br>
+    <button class="button" ng-click="toggleModalAddGoal()">Add Goal</button>
+</div>
 
+<div class="modal" id="addGoal">
+    <div class="modal-background"></div>
+        <div class="modal-card">
+                <header class="modal-card-head">
+                    <p ng-hide="gId" class="modal-card-title">Add Goal</p>
+                    <p ng-show="gId" class="modal-card-title">Edit Category</p>
+                    <button class="delete" aria-label="close" ng-click="toggleModalAddGoal()"></button>
+                </header>
+                <section class="modal-card-body">
+                    <h3>{{name}}</h3>
+                    <div>
+                        <label>Goal</label>
+                        <input type="text" placeholder='enter your goal here' ng-model="goalItems.goal">
+                    </div>
+                    <div>
+                        <label>details</label>
+                        <input type="text" placeholder="goal details" ng-model="goalItems.details" ng-value="goal.details">
+                    </div>
+                    <button class="button" ng-hide="gId" ng-click="addGoal()">Add Goal!</button>
+                    <button class="button" ng-show="gId" ng-click="updateGoal()">Update Goal!</button>
+                </section>
+        </div>
 </div>
 

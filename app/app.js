@@ -42,7 +42,7 @@ angular.module("balance", ["ngRoute", 'chart.js'])
       })
       .when('/all-goals', {
         templateUrl: 'partials/all-goals.html',
-        controller: 'AllGoalsCtrl',
+        controller: 'CategoryCtrl',
         resolve: { isAuthorized }
       })
 
