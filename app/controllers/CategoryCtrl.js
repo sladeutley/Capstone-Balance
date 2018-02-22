@@ -98,12 +98,14 @@ angular
             console.log('goal[1]',goal[1]);
             if (goal[1].uid === firebase.auth().currentUser.uid) {
                 $scope.allGoals.push(goal[1]);
-                console.log('$scope.allGoals',$scope.allGoals);
-                $scope.allGoals.forEach(userGoal => {
-                //   // console.log('goal.categoryId',goal.categoryId);
-                $scope.theCatId.push(userGoal.categoryId);
-              });
+                $scope.theCatId.push(goal[1].categoryId);                
+                // console.log('$scope.allGoals',$scope.allGoals);
                 // console.log('$scope.theCatId',$scope.theCatId);
+              //   $scope.allGoals.forEach(userGoal => {
+              //   //   // console.log('goal.categoryId',goal.categoryId);
+              //   $scope.theCatId.push(userGoal.categoryId);
+              // });
+              //   console.log('$scope.theCatId',$scope.theCatId);
 
                 CategoryFactory.getCategories()
                 .then (categoriesData => {
@@ -113,13 +115,22 @@ angular
                       // console.log('category',category);
                       // // console.log('goal.categoryId',goal.categoryId); 
                       // console.log('$scope.theCatId',$scope.theCatId);  
-                      console.log('$scope.theCatId',$scope.theCatId);                                                                               
-                      console.log('category.id',category.id);
-                      if ($scope.theCatId === category.id) {
+                      // console.log('$scope.theCatId',$scope.theCatId);                                                                               
+                      // console.log('category.id',category.id);
+                      // console.log('$scope.theCatId for what i need',$scope.theCatId);
+                      $scope.theCatId.forEach(catId => {
+                        if (catId === category.id) {
                           $scope.categoryName = category.name;
                           console.log('$scope.categoryName',$scope.categoryName);
                       } 
+                      });                     
+                      // if ($scope.theCatId === category.id) {
+                      //     $scope.categoryName = category.name;
+                      //     console.log('$scope.categoryName',$scope.categoryName);
+                      // } 
                     });
+                    // console.log('$scope.categoryName',$scope.categoryName);
+                    
                 });
                 // console.log('$scope.theCatId',$scope.theCatId);                
             }
