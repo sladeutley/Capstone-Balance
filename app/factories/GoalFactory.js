@@ -57,11 +57,18 @@ angular.module("balance").factory("GoalFactory", (FBUrl, $http, $q, $routeParams
     return $q((resolve, reject) => {
       $http
         .get(
-          `${FBUrl}/goals.json`
+          `${FBUrl}/goals.json?orderBy="uid"&equalTo="${
+            firebase.auth().currentUser.uid
+          }"`
         )
         .then(({ data }) => {
-          console.log("goals", data);
-          resolve(data);
+          let goalArr = Object.keys(data).map(goalKey => {
+            // console.log("categoryKey", categoryKey);
+            data[goalKey].id = goalKey;
+            //I'd LIKE TO REVIEW THIS OBJECT.KEYS - i get what its doing, just not how its working
+            return data[goalKey];
+          });
+          resolve(goalArr);
         });
     });
   }
@@ -70,6 +77,21 @@ angular.module("balance").factory("GoalFactory", (FBUrl, $http, $q, $routeParams
     return $q((resolve, reject) => {
       $http
         .delete(`${FBUrl}/goals/${goalId}.json`)
+        .then(data => {
+          resolve(data);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  }
+
+  //delete goals by category id for when you delete a category. BUT NEED TO GET SPECIFIC KEYS SO WILL HAVE TO PUT PROPERTY ON CATEGORY OF ALL THE GOAL IDS THEN LOOP TROUGH THOSE AND PUT THEM AS A PARAMETER ON DELETE CATEGORY FUNCTION
+
+  function deleteGoalByCatId(catId) {
+    return $q((resolve, reject) => {
+      $http
+        .delete(`${FBUrl}/goals/${catId}.json`)
         .then(data => {
           resolve(data);
         })
@@ -119,5 +141,5 @@ angular.module("balance").factory("GoalFactory", (FBUrl, $http, $q, $routeParams
         });
     });
   }
-  return { addNewGoal, getUserGoals, getUserGoalsForPolarArea, deleteGoal, getUserGoal, updateAccomplishedGoal, updateUserGoal };
+  return { addNewGoal, getUserGoals, getUserGoalsForPolarArea, getAllGoals, deleteGoal, deleteGoalByCatId, getUserGoal, updateAccomplishedGoal, updateUserGoal };
 });

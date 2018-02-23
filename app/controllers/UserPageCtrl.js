@@ -56,6 +56,7 @@ angular
       $scope.loaded = false;
       $scope.data = [];
       CategoryFactory.getCategories().then(categoriesData => {
+        console.log('categoriesData',categoriesData);
         if (categoriesData.length > 0) {
           //doing this bc not able to click on category on pie chart yet
           $scope.categories = categoriesData;
@@ -161,6 +162,9 @@ angular
     // actually do I want it to do that? Bc what if I have a goal autosuggestion thing, do I want the suggestions to be of all goals ever created or just the ones currently posted
 
     $scope.deleteUserCategory = categoryId => {
+      GoalFactory.deleteGoalByCatId(categoryId).then(() => {
+        console.log("is this working");
+      });
       CategoryFactory.deleteCategory(categoryId).then(() => {
         CategoryFactory.getCategories();
         $route.reload();

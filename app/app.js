@@ -40,6 +40,11 @@ angular.module("balance", ["ngRoute", 'chart.js'])
         controller: 'CategoryCtrl',
         resolve: { isAuthorized }
       })
+      .when('/all-goals', {
+        templateUrl: 'partials/all-goals.html',
+        controller: 'AllGoalsCtrl',
+        resolve: { isAuthorized }
+      })
 
       // .otherwise('/new-user'); WANT it to go the page that explains the site and says "get started here" or "register"
       .otherwise('/login');

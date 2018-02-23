@@ -60,6 +60,8 @@ angular.module("balance").factory("CategoryFactory", (FBUrl, $http, $q) => {
       $http 
         .get(`${FBUrl}/categories/${categoryId}.json`)
         .then(category => {
+          console.log('category',category);
+          // category.data.categoryId = categoryId; //had to add property for 'see all goals page' 
           resolve(category);
         })
         .catch(err => {

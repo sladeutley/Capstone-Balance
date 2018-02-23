@@ -36,6 +36,8 @@ angular
     };
 
     //getting goals
+
+
     // $scope.determineIfHasDetails = (goal) => {
     //   // console.log('goal.details',goal.details);
     //   console.log('goal.details.length',goal.details.length);
@@ -51,30 +53,9 @@ angular
 
     GoalFactory.getUserGoals()
       .then(goalsData => {
-        console.log('goalsData.length',goalsData.length);
-        console.log('goalsData',goalsData);
         if (goalsData.length > 0) {
           $scope.goals = goalsData;
-          console.log('$scope.goals',$scope.goals);
-          //to determine whether or not to display "details"
-          // goalsData.forEach(userGoal => {
-          //   $scope.determineIfHasDetails(userGoal);
-          //   console.log('$scope.determineIfHasDetails(userGoal)',$scope.determineIfHasDetails(userGoal));
-
-          // goalsData.forEach(goal => {
-          //   // $scope.determineIfHasDetails = () => {
-          //   // // console.log('goal.details',goal.details);
-          //   // console.log('goal.details.length',goal.details.length);
-          //   if (goal.details.length === 0) {
-          //     console.log('goal for no length',goal);
-          //     $scope.hasNoDetails = true;
-          //   } else if (goal.details.length > 0) {
-          //     console.log('goal for has length',goal);
-          //     $scope.hasNoDetails = false;
-          //   }
-          //   console.log('$scope.hasNoDetails',$scope.hasNoDetails);
-          // // };
-          // });          
+          console.log('$scope.goals',$scope.goals);       
         } else {
           $scope.message = "Add some categories, and start getting productive!";
         }
