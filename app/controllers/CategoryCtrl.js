@@ -53,95 +53,14 @@ angular
 
     GoalFactory.getUserGoals()
       .then(goalsData => {
-        console.log('goalsData.length',goalsData.length);
-        console.log('goalsData',goalsData);
         if (goalsData.length > 0) {
           $scope.goals = goalsData;
-          console.log('$scope.goals',$scope.goals);
-          //to determine whether or not to display "details"
-          // goalsData.forEach(userGoal => {
-          //   $scope.determineIfHasDetails(userGoal);
-          //   console.log('$scope.determineIfHasDetails(userGoal)',$scope.determineIfHasDetails(userGoal));
-
-          // goalsData.forEach(goal => {
-          //   // $scope.determineIfHasDetails = () => {
-          //   // // console.log('goal.details',goal.details);
-          //   // console.log('goal.details.length',goal.details.length);
-          //   if (goal.details.length === 0) {
-          //     console.log('goal for no length',goal);
-          //     $scope.hasNoDetails = true;
-          //   } else if (goal.details.length > 0) {
-          //     console.log('goal for has length',goal);
-          //     $scope.hasNoDetails = false;
-          //   }
-          //   console.log('$scope.hasNoDetails',$scope.hasNoDetails);
-          // // };
-          // });          
+          console.log('$scope.goals',$scope.goals);       
         } else {
           $scope.message = "Add some categories, and start getting productive!";
         }
       })
       .catch(err => {
-        console.log(err);
-      });
-
-          //get all goals
-
-    $scope.allGoals = [];
-    $scope.theCatId = [];
-
-    GoalFactory.getAllGoals().then(goalsData => {
-        let userGoals = Object.entries(goalsData);
-        console.log('userGoals.length',userGoals.length); //eventually, get it so if user has no goals, have a message saying 'add goals'
-        userGoals.forEach(goal => {
-            console.log('goal[1].uid',goal[1].uid);
-            console.log('goal[1]',goal[1]);
-            if (goal[1].uid === firebase.auth().currentUser.uid) {
-                $scope.allGoals.push(goal[1]);
-                $scope.theCatId.push(goal[1].categoryId);                
-                // console.log('$scope.allGoals',$scope.allGoals);
-                // console.log('$scope.theCatId',$scope.theCatId);
-              //   $scope.allGoals.forEach(userGoal => {
-              //   //   // console.log('goal.categoryId',goal.categoryId);
-              //   $scope.theCatId.push(userGoal.categoryId);
-              // });
-              //   console.log('$scope.theCatId',$scope.theCatId);
-
-                CategoryFactory.getCategories()
-                .then (categoriesData => {
-                    categoriesData.forEach((category) => {
-                      // //COULD I DO BRACKET NOTATION HERE?
-                      // // console.log('$scope.allGoals',$scope.allGoals);          
-                      // console.log('category',category);
-                      // // console.log('goal.categoryId',goal.categoryId); 
-                      // console.log('$scope.theCatId',$scope.theCatId);  
-                      // console.log('$scope.theCatId',$scope.theCatId);                                                                               
-                      // console.log('category.id',category.id);
-                      // console.log('$scope.theCatId for what i need',$scope.theCatId);
-                      $scope.theCatId.forEach(catId => {
-                        if (catId === category.id) {
-                          $scope.categoryName = category.name;
-                          console.log('$scope.categoryName',$scope.categoryName);
-                      } 
-                      });                     
-                      // if ($scope.theCatId === category.id) {
-                      //     $scope.categoryName = category.name;
-                      //     console.log('$scope.categoryName',$scope.categoryName);
-                      // } 
-                    });
-                    // console.log('$scope.categoryName',$scope.categoryName);
-                    
-                });
-                // console.log('$scope.theCatId',$scope.theCatId);                
-            }
-        });
-        console.log('$scope.allGoals',$scope.allGoals);
-        // if (goalsData.length > 0) {
-        // } else {
-        //     $scope.message = "Add some goals!";
-        // }
-    })
-    .catch(err => {
         console.log(err);
       });
 

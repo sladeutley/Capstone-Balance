@@ -57,11 +57,18 @@ angular.module("balance").factory("GoalFactory", (FBUrl, $http, $q, $routeParams
     return $q((resolve, reject) => {
       $http
         .get(
-          `${FBUrl}/goals.json`
+          `${FBUrl}/goals.json?orderBy="uid"&equalTo="${
+            firebase.auth().currentUser.uid
+          }"`
         )
         .then(({ data }) => {
-          console.log("goals", data);
-          resolve(data);
+          let goalArr = Object.keys(data).map(goalKey => {
+            // console.log("categoryKey", categoryKey);
+            data[goalKey].id = goalKey;
+            //I'd LIKE TO REVIEW THIS OBJECT.KEYS - i get what its doing, just not how its working
+            return data[goalKey];
+          });
+          resolve(goalArr);
         });
     });
   }

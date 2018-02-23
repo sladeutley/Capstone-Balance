@@ -1,11 +1,14 @@
 <!-- WHY IS THIS ALL WORKING?!?! THE NG-REPEAT IS FOR ALLGOALS BUT CHECKBOX IS WORKING? -->
 {{categoryName}}
+{{message}}
 
 <div class="content">
     <div id="allGoals">
         <h3>All Goals</h3>
-        <!-- <div ng-repeat="goal in allGoals"> -->
-            <div class="goal-container" ng-repeat="goal in allGoals">
+        <div ng-repeat="goal in allGoals">
+            {{goal.categoryName}}
+            
+            <!-- <div class="goal-container" ng-repeat="goal in allGoals"> -->
 
                 <!-- {{goal.goal}} -->
                 <div>
@@ -18,7 +21,7 @@
                 <button class="button" ng-click="deleteUserGoal(goal.id)">delete goal</button>
                 <button class="button" ng-click="updateCurrentGoal(goal.id)">edit goal</button>
             </div>
-        <!-- </div> -->
+        </div>
     </div>
     <br>
     <button class="button" ng-click="toggleModalAddGoal()">Add Goal</button>
