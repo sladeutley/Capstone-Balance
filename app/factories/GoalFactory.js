@@ -86,6 +86,21 @@ angular.module("balance").factory("GoalFactory", (FBUrl, $http, $q, $routeParams
     });
   }
 
+  //delete goals by category id for when you delete a category. BUT NEED TO GET SPECIFIC KEYS SO WILL HAVE TO PUT PROPERTY ON CATEGORY OF ALL THE GOAL IDS THEN LOOP TROUGH THOSE AND PUT THEM AS A PARAMETER ON DELETE CATEGORY FUNCTION
+
+  function deleteGoalByCatId(catId) {
+    return $q((resolve, reject) => {
+      $http
+        .delete(`${FBUrl}/goals/${catId}.json`)
+        .then(data => {
+          resolve(data);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  }
+
   function updateAccomplishedGoal(goalId, goalItem) {
     return $q((resolve, reject) => {
       console.log("this is being called");
@@ -126,5 +141,5 @@ angular.module("balance").factory("GoalFactory", (FBUrl, $http, $q, $routeParams
         });
     });
   }
-  return { addNewGoal, getUserGoals, getUserGoalsForPolarArea, getAllGoals, deleteGoal, getUserGoal, updateAccomplishedGoal, updateUserGoal };
+  return { addNewGoal, getUserGoals, getUserGoalsForPolarArea, getAllGoals, deleteGoal, deleteGoalByCatId, getUserGoal, updateAccomplishedGoal, updateUserGoal };
 });

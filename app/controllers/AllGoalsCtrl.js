@@ -109,14 +109,24 @@ angular
         if (goalsData.length > 0) {
           $scope.allGoals = goalsData;
           $scope.allGoals.forEach(goal => {
-              console.log('goal.categoryId',goal.categoryId);
               CategoryFactory.getUserCategory(goal.categoryId).then(cat => {
-                  console.log('cat',cat);
+                  if (cat.data === null) {
+                    console.log("jer");
+                    console.log('goal.id',goal.id);
+                    //deleting goals here that categories have been deleted but still are in firebase
+                    GoalFactory.deleteGoal(goal.id).then(() => {
+                        GoalFactory.getUserGoals();
+                        $route.reload();
+                      });
+                  } else {
                   goal.categoryName = cat.data.name;
+                  console.log('goal.categoryName',goal.categoryName);
+                  }
               });
         //     promiseArr.push(CategoryFactory.getUserCategory(goal.categoryId));
           });
-          console.log('$scope.allGoals',$scope.allGoals);
+        //   console.log('$scope.allGoals',$scope.allGoals);
+        // console.log('$scope.allGoals.categoryName',$scope.allGoals.categoryName);
         //   console.log('promiseArr',promiseArr);
         //   return $q.all(promiseArr)
         //   .then(data => {
