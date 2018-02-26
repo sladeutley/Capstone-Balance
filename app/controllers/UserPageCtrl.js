@@ -205,6 +205,10 @@ angular
       $location.url(`/categories/${categoryId}`);
     };
 
+    $scope.goToAllGoals = () => {
+      $location.url(`/all-goals`);
+    };
+
     //this is where when you click on a category in chart, you go to that page
     //compare index of click to index of $scope.labels. $scope.labels[]
     $scope.goToCategory = event => {

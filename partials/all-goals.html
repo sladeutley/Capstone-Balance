@@ -1,33 +1,45 @@
 <!-- WHY IS THIS ALL WORKING?!?! THE NG-REPEAT IS FOR ALLGOALS BUT CHECKBOX IS WORKING? -->
-{{message}}
 
-<div class="content">
-    <div id="allGoals">
-        <h3>All Goals</h3>
-        <div ng-repeat="goal in allGoals">
-            <span class="categoryNames">{{goal.categoryName}}</span>
-            
-            <!-- <div class="goal-container" ng-repeat="goal in allGoals"> -->
-
-                <!-- {{goal.goal}} -->
-                <div>
-                    <input ng-click="isGoalAccomplished(goal.id)" ng-checked="goal.accomplished" id="checkbox{{goal.id}}" type="checkbox">
-                    goal: {{goal.goal}}
-                </div>
-                <div ng-if="goal.details.length > 0">
-                    details: {{goal.details}}
-                </div>
-                <button class="button" ng-click="deleteUserGoal(goal.id)">delete goal</button>
-                <button class="button" ng-click="updateCurrentGoal(goal.id)">edit goal</button>
-            </div>
+<section class="hero is-primary">
+    <div class="hero-body">
+        <div class="container">
+        <h1 class="title">
+            All Goals
+        </h1>
+        <h2 class="subtitle">
+            {{message}}
+        </h2>
         </div>
     </div>
+</section>
+
+<div class="content">
+<div>
+    <div class="goal-container" ng-repeat="goal in allGoals">
+        <span class="categoryNames">
+            {{goal.categoryName}}
+        </span>
+            <div>
+                <input ng-click="isGoalAccomplished(goal.id)" ng-checked="goal.accomplished" id="checkbox{{goal.id}}" type="checkbox">
+                goal: {{goal.goal}}
+            </div>
+            <div ng-if="goal.details.length > 0">
+                details: {{goal.details}}
+            </div>
+            <br>
+            <button class="button" ng-click="deleteUserGoal(goal.id)">delete goal</button>
+            <button class="button" ng-click="updateCurrentGoal(goal.id)">edit goal</button>
+        </div>
+        <br>
+    </div>
     <br>
-    <button class="button" ng-click="toggleModalAddGoal()">Add Goal</button>
+    <button class="button is-primary is-outlined" ng-click="toggleModalAddGoal()"><strong>Add Goal</strong></button>
+    <br>
 </div>
 
+
 <div class="modal" id="addGoal">
-    <div class="modal-background"></div>
+    <div class="modal-background" ng-click="toggleModalAddGoal()"></div>
         <div class="modal-card">
                 <header class="modal-card-head">
                     <p ng-hide="gId" class="modal-card-title">Add Goal</p>
@@ -40,15 +52,15 @@
                         <label>Category</label>
                         <select class="select">
                         <option ng-model="goal.CategoryName" ng-repeat="categoryName in categoryNamesWithoutDuplicates">{{categoryName}}</option>
-                        
+                        </select>
                     </div>
                     <div>
-                        <label>Goal</label>
-                        <input type="text" placeholder='enter your goal here' ng-model="goalItems.goal">
+                        <label for="goalInput">Goal</label>
+                        <input class="text" id="goalInput" type="text" placeholder='enter your goal here' ng-model="goalItems.goal">
                     </div>
                     <div>
                         <label>details</label>
-                        <input type="text" placeholder="goal details" ng-model="goalItems.details" ng-value="goal.details">
+                        <input class="text" type="text" placeholder="goal details" ng-model="goalItems.details" ng-value="goal.details">
                     </div>
                     <button class="button" ng-hide="gId" ng-click="addGoal()">Add Goal!</button>
                     <button class="button" ng-show="gId" ng-click="updateGoal()">Update Goal!</button>

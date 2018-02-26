@@ -1,38 +1,45 @@
+<section class="hero is-primary">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">
+          Categories
+        </h1>
+        <!-- <h2 class="subtitle" ng-hide="isItPie">
+            Shows Importance of Each Category
+        </h2>
+        <h2 class="subtitle" ng-show="isItPie">
+            Shows Percentage of Goals Completed In Each Category
+        </h2> -->
+      </div>
+    </div>
+  </section>
+
 <div class="content">
-<h3>{{message}}</h3>
-
-<h2>Categories</h2>
-<div class="columns">
-    <button class="button column" ng-click="toggleModalSeeCategories()">See Categories</button>
-    <button class="button column" ng-click="toggleModalAddCategory()">Add Category</button>
-    <button class="button column"><a href="#!/all-goals">See All Your Goals</a></button>
-    <button class="button column" ng-hide="isItPie" ng-click="toggle()">Show Me My Progress</button>
-    <button class="button column" ng-show="isItPie" ng-click="toggle()">Show Category Importance</button>
-</div>
-
-<!-- CANT GET IT TO SHOW ID WHEN YOU CLICK ON SPECIFIC CATEGORY BECAUSE THE CHART (IN DEVELOPER TOOLS ON BROWSER) IS IN JUST ONE GIANT DIV -->
-<!-- <div id="{{categoryIds}}"> -->
-<!-- <canvas id="polar-area" class="chart chart-polar-area"
-  chart-data="data" chart-labels="labels" chart-options="options" chart-click="goToCategory">
-</canvas>  -->
-<!-- <canvas id="pie" class="chart chart-pie"
-  chart-data="data" chart-labels="labels" chart-options="options" chart-click="goToCategory">
-</canvas>  -->
-<br>
-<div ng-hide="isItPie">
-    <h5>Shows Importance of Each Category</h5>
-</div>
-<div ng-show="isItPie">
-    <h5>Shows Percentage of Goals Completed In Each Category</h5>
-</div>
-<br>
-<canvas id="chart" ng-if="loaded" id="base" class="chart-base" chart-type="type"
-  chart-data= "data" chart-labels="labels" chart-colors ="colors" chart-options="labelOptions" chart-click="goToCategory">
-</canvas> 
-<button class="button" ng-hide="isItPie" ng-click="toggle()">Show Me My Progress</button>
-<button class="button" ng-show="isItPie" ng-click="toggle()">Back</button>
-<br>
-<br>
+    <h3>{{message}}</h3>
+    <div class="columns is-gapless">
+        <button class="button column is-primary is-outlined" ng-click="toggleModalSeeCategories()">See All Categories</button>
+        <button class="button column is-primary is-outlined" ng-click="toggleModalAddCategory()">Add Category</button>
+        <button class="button column is-primary is-outlined" ng-click="goToAllGoals()">See All Your Goals</button>
+        <button class="button column is-primary is-outlined" ng-hide="isItPie" ng-click="toggle()">Show My Progress</button>
+        <button class="button column is-primary is-outlined" ng-show="isItPie" ng-click="toggle()">Show Category Importance</button>
+    </div>
+    <br>
+    <div ng-hide="isItPie">
+        <h5>Shows Importance of Each Category</h5>
+        <p>e.g. "category: importance level"</p>
+    </div>
+    <div ng-show="isItPie">
+        <h5>Shows Percentage of Goals Completed In Each Category</h5>
+        <p>e.g. "category: percentage of goals completed"</p>
+    </div>
+    <br>
+    <canvas id="chart" ng-if="loaded" id="base" class="chart-base" chart-type="type"
+    chart-data= "data" chart-labels="labels" chart-colors ="colors" chart-options="labelOptions" chart-click="goToCategory">
+    </canvas> 
+    <button class="button is-primary is-outlined" ng-hide="isItPie" ng-click="toggle()">Show My Progress</button>
+    <button class="button is-primary is-outlined" ng-show="isItPie" ng-click="toggle()">Back</button>
+    <br>
+    <br>
 <!-- </div> -->
 <div class="modal" id="seeCategories">
     <div class="modal-background" ng-click="toggleModalSeeCategories()"></div>
@@ -45,9 +52,11 @@
                 <section class="modal-card-body">
                 <div id="categories" ng-repeat="category in categories">
                     <!-- could I use ng-href here? -->
+                    <div class="see-categories">
                     <a ng-click="goToCategoryPage(category.id)">{{category.name}}</a>
                     <button class="button" id="delete-category-btn" ng-click="deleteUserCategory(category.id)">delete category</button>
                     <button class="button" id="update-category-btn" ng-click="updateSelectedCategory(category.id)">update category</button>       
+                    </div>
                 </div>
                 </section>
             <!-- </div> -->
@@ -70,15 +79,15 @@
                 <h3>{{name}}</h3>
                 <div>
                     <label>Category Title</label>
-                    <input type="text" placeholder='for example, "fitness, social-life, work, etc."' ng-model="categoryItems.name">
+                    <input class="input" type="text" placeholder='for example, "fitness, social-life, work, etc."' ng-model="categoryItems.name">
                 <!-- deleted ng-value, what does that even do????? -->
                     </div>
+                    <br>
                     <div>
                     <label>Category Importance</label>
-                <!-- <input type="text" placeholder="type a number from 1 to 10" ng-model="categoryItems.importance" ng-value="item.importance"> -->
-                        <!-- I'm sure there's an easier way to do this!!!! -->
+                <!-- ????ng-value="item.importance"> what does ng-value doe -->
                     <select class="select" ng-model="categoryItems.importance">
-                    <!-- 1-10 - CANT GET THIS AS A PLACEHOLDER -->
+
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -91,6 +100,7 @@
                     <option value="10">10</option>           
                     </select>
                 </div>
+                <br>
                 <button class="button" ng-hide="catId" ng-click="addCategory()">Add Category!</button>
                 <button class="button" ng-show="catId" ng-click="updateUserCategory()">Update Category!</button>
                 </section>

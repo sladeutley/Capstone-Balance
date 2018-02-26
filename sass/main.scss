@@ -51,7 +51,8 @@ a {
 //   width: 80%;
 // }
 .categoryNames {
-  color: rgba(85, 172, 238, 1);
+  color: white;
+  // color: rgb(240, 244, 247);
 }
 
 #categories:hover {
@@ -65,9 +66,20 @@ a {
 }
 
 .goal-container {
-  border: 1px black solid;
-  // border-radius: 10%;
+  border: 3px white solid;
+  background-color: rgb(144, 198, 240);
+  padding: 10px;
+  border-radius: 1em;
 }
+
+.see-categories {
+  padding: 10px;
+}
+
+// .button {
+//   display: flex;
+//   justify-content: flex-end;
+// }
 
 .logo-image {
   height: 25px;

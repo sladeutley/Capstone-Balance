@@ -1,35 +1,38 @@
+<section class="hero is-primary">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">
+            Goals!
+        </h1>
+        <h2 class="subtitle">
+            {{categoryName}}
+        </h2>
+      </div>
+    </div>
+  </section>
 <div class="content">
-    <h1>{{categoryName}}</h1>
-
-    <!-- <container class="goal-container"> -->
-        <div id="allGoals">
-            <h3>GOALS!</h3>
-            <div class="goal-container" ng-repeat="goal in goals">
-                    <!-- &#10004 -->
-                    <!-- {{goal.id}} needs to be specific id for each check mark -->
-                <div>
-                    <input ng-click="isGoalAccomplished(goal.id)" ng-checked="goal.accomplished" id="checkbox{{goal.id}}" type="checkbox">
-                    goal: {{goal.goal}}
-                </div>
-                <div ng-if="goal.details.length > 0">
-                    details: {{goal.details}}
-                </div>
-                <!-- <div ng-show="hasNoDetails">
-                    details: {{goal.details}}
-                </div> -->
-                <br>
-                <button class="button" ng-click="deleteUserGoal(goal.id)">delete goal</button>
-                <button class="button" ng-click="updateCurrentGoal(goal.id)">edit goal</button>
+    <div>
+        <div class="goal-container" ng-repeat="goal in goals">
+            <div>
+                <input ng-click="isGoalAccomplished(goal.id)" ng-checked="goal.accomplished" id="checkbox{{goal.id}}" type="checkbox">
+                goal: {{goal.goal}}
             </div>
+            <div ng-if="goal.details.length > 0">
+                details: {{goal.details}}
+            </div>
+            <br>
+            <button class="button" id="goal-button" ng-click="deleteUserGoal(goal.id)">delete goal</button>
+            <button class="button" id="goal-button" ng-click="updateCurrentGoal(goal.id)">edit goal</button>
         </div>
-        <!-- <button class="button" ng-click="toggleModalSeeCategories()">See Categories</button> -->
-    <!-- </container> -->
+        <br>
+    </div>
     <br>
-    <button class="button" ng-click="toggleModalAddGoal()">Add Goal</button>
+    <button class="button is-primary is-outlined" ng-click="toggleModalAddGoal()"><strong>Add Goal</strong></button>
+    <br>
 </div>
 
 <div class="modal" id="addGoal">
-    <div class="modal-background"></div>
+    <div class="modal-background" ng-click="toggleModalAddGoal()"></div>
         <div class="modal-card">
                 <header class="modal-card-head">
                     <p ng-hide="gId" class="modal-card-title">Add Goal</p>
@@ -40,12 +43,13 @@
                     <h3>{{name}}</h3>
                     <div>
                         <label>Goal</label>
-                        <input type="text" placeholder='enter your goal here' ng-model="goalItems.goal">
+                        <input class="input" type="text" placeholder='enter your goal here' ng-model="goalItems.goal">
                     </div>
                     <div>
                         <label>details</label>
-                        <input type="text" placeholder="goal details" ng-model="goalItems.details" ng-value="goal.details">
+                        <input class="input" type="text" placeholder="goal details" ng-model="goalItems.details" ng-value="goal.details">
                     </div>
+                    <br>
                     <button class="button" ng-hide="gId" ng-click="addGoal()">Add Goal!</button>
                     <button class="button" ng-show="gId" ng-click="updateGoal()">Update Goal!</button>
                 </section>
