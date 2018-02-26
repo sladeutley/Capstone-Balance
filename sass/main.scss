@@ -2,7 +2,13 @@
   list-style-type: none;
   cursor: pointer;
   padding-top: .5em; 
-  color: black;
+  // color: rgb(20, 166, 185);
+  padding-left: 30px;
+}
+
+.nav-items {
+  color: rgb(20, 166, 185);
+  font-weight: bolder;  
 }
 
 .nav-items:hover {
@@ -11,7 +17,8 @@
 
 .navs ul {
   display: flex;
-  justify-content: space-around;
+  // justify-content: space-around;
+  justify-content: flex-end;
   padding-top: 1.3em;
   height: 46px;
   align-items: 0 10px;
