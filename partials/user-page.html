@@ -1,10 +1,13 @@
 <div class="content">
 <h3>{{message}}</h3>
-<div>
-    <h2>Categories</h2>
-    <button class="button" ng-click="toggleModalSeeCategories()">See Categories</button>
-    <button class="button" ng-click="toggleModalAddCategory()">Add Category</button>
-    <button class="button"><a href="#!/all-goals">See All Your Goals</a></button>
+
+<h2>Categories</h2>
+<div class="columns">
+    <button class="button column" ng-click="toggleModalSeeCategories()">See Categories</button>
+    <button class="button column" ng-click="toggleModalAddCategory()">Add Category</button>
+    <button class="button column"><a href="#!/all-goals">See All Your Goals</a></button>
+    <button class="button column" ng-hide="isItPie" ng-click="toggle()">Show Me My Progress</button>
+    <button class="button column" ng-show="isItPie" ng-click="toggle()">Show Category Importance</button>
 </div>
 
 <!-- CANT GET IT TO SHOW ID WHEN YOU CLICK ON SPECIFIC CATEGORY BECAUSE THE CHART (IN DEVELOPER TOOLS ON BROWSER) IS IN JUST ONE GIANT DIV -->

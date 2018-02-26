@@ -1,12 +1,11 @@
 <!-- WHY IS THIS ALL WORKING?!?! THE NG-REPEAT IS FOR ALLGOALS BUT CHECKBOX IS WORKING? -->
-{{categoryName}}
 {{message}}
 
 <div class="content">
     <div id="allGoals">
         <h3>All Goals</h3>
         <div ng-repeat="goal in allGoals">
-            {{goal.categoryName}}
+            <span class="categoryNames">{{goal.categoryName}}</span>
             
             <!-- <div class="goal-container" ng-repeat="goal in allGoals"> -->
 
@@ -37,6 +36,12 @@
                 </header>
                 <section class="modal-card-body">
                     <h3>{{name}}</h3>
+                    <div>
+                        <label>Category</label>
+                        <select class="select">
+                        <option ng-model="goal.CategoryName" ng-repeat="categoryName in categoryNamesWithoutDuplicates">{{categoryName}}</option>
+                        
+                    </div>
                     <div>
                         <label>Goal</label>
                         <input type="text" placeholder='enter your goal here' ng-model="goalItems.goal">

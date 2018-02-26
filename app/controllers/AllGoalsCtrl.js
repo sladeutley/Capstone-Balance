@@ -103,6 +103,8 @@ angular
     //   });
     // });
 
+    let categoryNames = [];
+
     GoalFactory.getAllGoals()
       .then(goalsData => {
         let promiseArr = [];
@@ -121,10 +123,15 @@ angular
                   } else {
                   goal.categoryName = cat.data.name;
                   console.log('goal.categoryName',goal.categoryName);
+                  categoryNames.push(goal.categoryName);
+                  $scope.categoryNamesWithoutDuplicates = Array.from(new Set(categoryNames)); //cool way I found to get rid of duplicates in array using es6
+                  console.log('$scope.categoryNamesWithoutDuplicates',$scope.categoryNamesWithoutDuplicates);
                   }
               });
         //     promiseArr.push(CategoryFactory.getUserCategory(goal.categoryId));
           });
+          console.log('categoryNames',categoryNames);
+          
         //   console.log('$scope.allGoals',$scope.allGoals);
         // console.log('$scope.allGoals.categoryName',$scope.allGoals.categoryName);
         //   console.log('promiseArr',promiseArr);

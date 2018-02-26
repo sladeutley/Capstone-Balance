@@ -36,6 +36,7 @@ a {
   margin-top: 2em;
   margin-left: 1em;
   padding-top: -5em;
+  margin-right: 1em;
 }
 
 .content h4 {
@@ -49,6 +50,9 @@ a {
 // input {
 //   width: 80%;
 // }
+.categoryNames {
+  color: rgba(85, 172, 238, 1);
+}
 
 #categories:hover {
   color: rgba(85, 172, 238, 1);
